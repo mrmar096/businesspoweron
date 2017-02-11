@@ -8,8 +8,22 @@ final class Business extends CI_Controller
         parent::__construct();
         $this->load->model('Business_model','bm');
     }
-    public function index(){
-        $this->load->view('user/dashboard');
+    public function index($id){
+     if(empty($id)){
+         $data=$this->bm->get(null);
+         if($data){
+             $this->dashboard($data);
+         }else{
+             show_error("Ninguna empresa encontrada",404);
+         }
+     }else{
+         $data=$this->bm->get($id);
+         if($data){
+             $this->dashboard($data);
+         }else{
+             show_error("Ninguna empresa encontrada",404);
+         }
+     }
     }
     public function register(){
         if($this->input->is_ajax_request()){
@@ -33,21 +47,24 @@ final class Business extends CI_Controller
                 }
             }
         }else{
-            $this->index();
+           redirect(base_url());
         }
     }
-    public function detail($cif){
-        if($this->input->get() && !empty($cif)) {
+    public function detail($id){
+        if($this->input->get() && !empty($id)) {
             //Le asignamos las reglas de validacion
-            if($this->bm->get($cif)){
-
+            if($data=$this->bm->get($id)){
+                $this->load->view('commons/header');
+                $this->load->view('business/details',$data);
+                $this->load->view('commons/footer');
             }else{
-                $this->error_page(['error'=>'El cif no corresponde con ninguna empresa']);
+               show_error("No se ha encontrado la empresa solicitada",404);
             }
         }else{
-            $this->index();
+            redirect(base_url());
         }
     }
+
     public function all_business(){
         if($data=$this->bm->get(null)){
             output_json(["status"=>1,"bussiness"=>$data]);
@@ -55,9 +72,13 @@ final class Business extends CI_Controller
             output_json(["status"=>0,"message"=>"No se ha localizado ninguna empresa"]);
         }
     }
-    private function error_page($error)
+
+    private function dashboard($data)
     {
-        $this->load->view('errors/error_404',$error);//Falta Crearla
+        $this->load->view('commons/header');
+        $this->load->view('dashboard/business',$data);
+        $this->load->view('commons/footer');
     }
+
 }
 //End of file applications/controller/Hello.php

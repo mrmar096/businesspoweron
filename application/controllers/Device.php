@@ -50,7 +50,7 @@ final class Device extends CI_Controller
             }else{
                 $post=$this->input->post();
                 if($this->dm->insert($post)){
-                    echo "Exito";
+                    $this->devices($cif);
                 }else{
                     echo "Algo fallo al insertar";
                 }
@@ -64,7 +64,7 @@ final class Device extends CI_Controller
                 if($this->dm->delete(["mac"=>$mac])){
                     output_json(['status'=>1,'message'=>"Eliminado con exito"]);
                 }else{
-                    output_json(['status'=>0,'message'=>"Ningun elemento ha sido eliminado"]);
+                    output_json(['status'=>0,'message'=>"Ningun elemento ha sido eliminado"],400);
                 }
         }else{
             redirect($this->agent->referer);
@@ -76,7 +76,7 @@ final class Device extends CI_Controller
             if($this->dm->update($data,["mac"=>$mac])){
                 output_json(['status'=>1,'message'=>"Actualizado con exito"]);
             }else{
-                output_json(['status'=>0,'message'=>"No se acualizó ningun elemento"]);
+                output_json(['status'=>0,'message'=>"No se acualizó ningun elemento"],400);
             }
         }else{
             redirect($this->agent->referer);

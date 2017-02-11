@@ -21,10 +21,9 @@ class Control_Access
         $peticion=substr($uri,strpos($uri,"/",1)+1);
         if(!in_array($peticion,$this->grant) ){
 
-            if(!$this->session->user){
+            if(!$this->session->get_userdata()) {
                 redirect(base_url());
             }
-
 
         }
 
