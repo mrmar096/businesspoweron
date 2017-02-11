@@ -87,6 +87,22 @@ final class User extends CI_Controller
             redirect(base_url());
         }
     }
+    public function logout($uid){
+        $this->session->unset_userdata(['uid'=>$uid]);
+        redirect(base_url('home'));
+    }
+    public function update($uid){
+        if($this->input->is_ajax_request()){
+            $data=$this->input->post();
+            if($this->um->update($data,["uid"=>$uid])){
+                output_json(['status'=>1,'message'=>"Actualizado con exito"]);
+            }else{
+                output_json(['status'=>0,'message'=>"No se acualizó ningun elemento"],400);
+            }
+        }else{
+            redirect($this->agent->referer);
+        }
+    }
     public function business_devices($id){
         redirect(base_url('business/'.$id));
     }

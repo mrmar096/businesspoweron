@@ -37,17 +37,18 @@ final class Business extends CI_Controller
             $this->form_validation->set_message("min_length","El campo %s debe tener al menos %s caracteres");
             $this->form_validation->set_message("max_length","El campo %s no debe tener mas de %s caracteres");
             if(!$this->form_validation->run()){
-                return json_encode(['status'=>0,'message'=>validation_errors()]);
+                output_json(['status'=>0,'message'=>validation_errors()]);
             }else{
                 $post=$this->input->post();
+                $post["user"]=$this->session->get_userdata()["uid"];
                 if($this->bm->insert($post)){
-                    echo "Exito";
+                    output_json(['status'=>1,'message'=>'Se ha registrado con exito']);
                 }else{
-                    echo "Algo fallo al insertar";
+                    output_json(['status'=>0,'message'=>'Error interno al insertar'],400);
                 }
             }
         }else{
-           redirect(base_url());
+            redirect($this->agent->referer);
         }
     }
     public function detail($id){
@@ -61,16 +62,38 @@ final class Business extends CI_Controller
                show_error("No se ha encontrado la empresa solicitada",404);
             }
         }else{
-            redirect(base_url());
+            redirect($this->agent->referer);
         }
     }
-
+    public function update($cif){
+        if($this->input->is_ajax_request()){
+            $data=$this->input->post();
+            if($this->bm->update($data,["cif"=>$cif])){
+                output_json(['status'=>1,'message'=>"Actualizado con exito"]);
+            }else{
+                output_json(['status'=>0,'message'=>"No se acualizó ningun elemento"],400);
+            }
+        }else{
+            redirect($this->agent->referer);
+        }
+    }
+    public function delete($cif){
+        if($this->input->is_ajax_request()){
+            if($this->bm->delete(["cif"=>$cif])){
+                output_json(['status'=>1,'message'=>"Eliminado con exito"]);
+            }else{
+                output_json(['status'=>0,'message'=>"Ningun elemento ha sido eliminado"],400);
+            }
+        }else{
+            redirect($this->agent->referer);
+        }
+    }
     public function all_business(){
         if($data=$this->bm->get(null)){
             output_json(["status"=>1,"bussiness"=>$data]);
         }else{
             output_json(["status"=>0,"message"=>"No se ha localizado ninguna empresa"]);
-        }
+    }
     }
 
     private function dashboard($data)

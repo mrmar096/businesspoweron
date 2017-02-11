@@ -1,18 +1,19 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-final class Device extends CI_Controller 
+final class Device extends CI_Controller
 {
     const OFF=0;
     const ON=1;
     const WOL_SEND=2;
-
+    const ADMIN=1;
+    const USER=0;
     public function __construct()
     {
         parent::__construct();
         $this->load->model('Device_model','dm');
     }
-    
+
     public function wakeUp($mac)
     {
         if($this->dm->get($mac)->status==self::ON){
@@ -28,10 +29,18 @@ final class Device extends CI_Controller
         }
     }
     public function devices($cif){
-        if($data=$this->dm>get(["cif"=>$cif])){
-            $this->load->view('/user/dashboard',$data);
+        if(!empty($cif)){
+            if($data=$this->dm>get(["cif"=>$cif])){
+                $this->dashboard($data);
+            }else{
+                output_json(['status'=>0,'No se ha encontrado dispositivos para esta empresa'],404);
+            }
+        }else if($this->session->get_userdata()["type"]==self::ADMIN){
+            $data=$this->dm>get(null);
+            $this->dashboard($data);
+
         }else{
-            output_json(['status'=>0,'No se ha encontrado dispositivos para esta empresa'],404);
+            output_json(['status'=>0,'No se ha especificado un cif'],401);
         }
     }
     public function register($cif){
@@ -52,7 +61,7 @@ final class Device extends CI_Controller
                 if($this->dm->insert($post)){
                     $this->devices($cif);
                 }else{
-                    echo "Algo fallo al insertar";
+                    output_json(['status'=>0,'message'=>"Error interno al insertar"]);
                 }
             }
         }else{
@@ -61,11 +70,11 @@ final class Device extends CI_Controller
     }
     public function delete($mac){
         if($this->input->is_ajax_request()){
-                if($this->dm->delete(["mac"=>$mac])){
-                    output_json(['status'=>1,'message'=>"Eliminado con exito"]);
-                }else{
-                    output_json(['status'=>0,'message'=>"Ningun elemento ha sido eliminado"],400);
-                }
+            if($this->dm->delete(["mac"=>$mac])){
+                output_json(['status'=>1,'message'=>"Eliminado con exito"]);
+            }else{
+                output_json(['status'=>0,'message'=>"Ningun elemento ha sido eliminado"],400);
+            }
         }else{
             redirect($this->agent->referer);
         }
@@ -81,5 +90,11 @@ final class Device extends CI_Controller
         }else{
             redirect($this->agent->referer);
         }
+    }
+    private function dashboard($data)
+    {
+        $this->load->view('commons/header');
+        $this->load->view('dashboard/devices',$data);
+        $this->load->view('commons/footer');
     }
 }
