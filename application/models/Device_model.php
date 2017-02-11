@@ -31,6 +31,7 @@ final class Devices_model extends CI_Model
     public function delete($where)
     {
         $this->db->delete(self::TABLE,$where);
-        return $this->db->affected_rows();
+
+        return $this->db->affected_rows()>0;
     }
 }

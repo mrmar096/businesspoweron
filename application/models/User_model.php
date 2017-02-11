@@ -39,7 +39,7 @@ final class User_model extends CI_Model
             $this->db->where("username",$username);
         }
         $this->db->delete(self::TABLE);
-        return $this->db->affected_rows();
+        return $this->db->affected_rows()>0;
     }
 }
 //End of file applications/models/User_model.php
