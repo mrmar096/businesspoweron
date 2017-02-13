@@ -17,7 +17,9 @@ final class User extends CI_Controller
     }
 
     public function home(){
+        $this->load->view("commons/header");
         $this->load->view("home");
+        $this->load->view("commons/footer");
     }
     public function delete($param)
     {
@@ -73,17 +75,15 @@ final class User extends CI_Controller
             $this->form_validation->set_message("min_length","El campo %s debe tener al menos %s caracteres");
             $this->form_validation->set_message("max_length","El campo %s no debe tener mas de %s caracteres");
             if(!$this->form_validation->run()){
-                die('Correcto');
-                output_json(['status'=>0,'message'=>validation_errors()]);
+                echo json_encode(['status'=>0,'message'=>validation_errors()]);
             }else{
-                die('fail');
                 $post=$this->input->post();
                 $post['uid']=uniqid('_user_');
                 if($this->um->insert($post)){
                     $this->business_devices($post['uid']);
                     $this->session->set_userdata($post);
                 }else{
-                    output_json(['status'=>0,'message'=>'Error interno al insertar'],400);
+                    echo json_encode(['status'=>0,'message'=>'Error interno al insertar']);
                 }
             }
         }else{

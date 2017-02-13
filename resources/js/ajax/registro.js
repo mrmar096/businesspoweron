@@ -8,7 +8,6 @@ $(function() {
 	$('#form-registro-user').on('submit', function(e) {
 		e.preventDefault();
 		var url=this.action;
-		console.log("hola");
 		console.log(url);
         var form=$(this);
 		$.ajax({
@@ -21,6 +20,7 @@ $(function() {
 			},
 			success:function (response) {
                 var data=JSON.parse(response);
+				console.log(data);
 				if(data.status==1){
                     console.log(response);
 				}else{
