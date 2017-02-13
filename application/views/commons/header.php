@@ -13,7 +13,7 @@
 <body>
 
 <?php
-    if ($this->session->get_userdata()){
+    if (!$this->session->userdata()){
         $this->load->view('commons/nav');
     }
 ?>
