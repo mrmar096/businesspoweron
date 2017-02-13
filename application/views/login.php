@@ -16,55 +16,38 @@
 
                 <form id="form" method="post" role="form" action="<?=base_url('user/login');?>">
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        <input class="mdl-textfield__input" type="email" id="email">
+                        <input name="email" class="mdl-textfield__input" type="email" id="email">
                         <label class="mdl-textfield__label" for="email">Email...</label>
                     </div>
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        <input class="mdl-textfield__input" type="password" id="password">
+                        <input name="password" class="mdl-textfield__input" type="password" id="password">
                         <label class="mdl-textfield__label" for="password">Contraseña...</label>
                     </div>
+                    <center>
+                        <button  class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" type="submit">Iniciar Sesion</button>
+                    </center>
+                </form>
             </div>
             <div class="mdl-tabs__panel" id="lannisters-panel">
-                <form id="form" method="post" role="form" action="<?=base_url('user/login');?>">
+                <form id="form" method="post" role="form" action="<?=base_url('user/register');?>">
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        <input class="mdl-textfield__input" type="email" id="email">
+                        <input name="name" class="mdl-textfield__input" type="text" id="name">
+                        <label class="mdl-textfield__label" for="name">Nombre...</label>
+                    </div>
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <input name="email" class="mdl-textfield__input" type="email" id="email">
                         <label class="mdl-textfield__label" for="email">Email...</label>
                     </div>
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        <input class="mdl-textfield__input" type="password" id="password">
+                        <input name="password" class="mdl-textfield__input" type="password" id="password">
                         <label class="mdl-textfield__label" for="password">Contraseña...</label>
                     </div>
-                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        <input class="mdl-textfield__input" type="password" id="password">
-                        <label class="mdl-textfield__label" for="password">Nombre...</label>
-                    </div>
+
+                    <center>
+                        <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" type="submit">Registrarse</button>
+                    </center>
+                </form>
             </div>
         </div>
-
-
-
-        <main class="mdl-layout__content">
-            <section class="mdl-layout__tab-panel is-active" id="fixed-tab-1">
-                <div class="page-content">
-
-                </div>
-            </section>
-            <section class="mdl-layout__tab-panel" id="fixed-tab-2">
-                <div class="page-content">
-
-                </div>
-            </section>
-
-        </main>
-
-
-
-
-
     </div>
-    <div class="mdl-card__actions mdl-card--border">
-        <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" type="submit">Iniciar Sesion</button>
-        <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">Registrarse</button>
-    </div>
-    </form>
 </div>
