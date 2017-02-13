@@ -1,8 +1,8 @@
 
 
-<div  style="margin:0 auto; margin-top: 10%" class="demo-card-wide mdl-card mdl-shadow--2dp">
+<div  class="demo-card-wide mdl-card mdl-shadow--2dp home-login">
     <div class="mdl-card__title">
-        <h2 class="mdl-card__title-text">Bienvenido</h2>
+        <h2 class="mdl-card__title-text ">Bienvenido</h2>
     </div>
     <div class="mdl-card__supporting-text">
 
@@ -23,9 +23,9 @@
                         <input name="password" class="mdl-textfield__input" type="password" id="password">
                         <label class="mdl-textfield__label" for="password">Contraseña...</label>
                     </div>
-                    <center>
+                    <div align="center">
                         <button  class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" type="submit">Iniciar Sesion</button>
-                    </center>
+                    </div>
                 </form>
             </div>
             <div class="mdl-tabs__panel" id="lannisters-panel">
@@ -43,9 +43,9 @@
                         <label class="mdl-textfield__label" for="password">Contraseña...</label>
                     </div>
 
-                    <center>
+                    <div align="center">
                         <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" type="submit">Registrarse</button>
-                    </center>
+                    </div>
                 </form>
             </div>
         </div>

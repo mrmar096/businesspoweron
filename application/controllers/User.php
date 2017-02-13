@@ -78,7 +78,7 @@ final class User extends CI_Controller
                 echo json_encode(['status'=>0,'message'=>validation_errors()]);
             }else{
                 $post=$this->input->post();
-                $post['uid']=uniqid('_user_');
+                $post['uid']=uniqid('user_');
                 if($this->um->insert($post)){
                     $this->business_devices($post['uid']);
                     $this->session->set_userdata($post);

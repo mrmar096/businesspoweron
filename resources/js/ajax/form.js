@@ -17,7 +17,7 @@ $(function() {
 			data:form.serialize(),
 			beforeSend:function () {
 				$("#error-block").hide();
-				btn.text("Enviando...");
+				btn.text("Espere...");
 			},
 			success:function (response) {
 				var data=JSON.parse(response);

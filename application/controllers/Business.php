@@ -9,6 +9,7 @@ final class Business extends CI_Controller
         $this->load->model('Business_model','bm');
     }
     public function index($id){
+        die("hola");
      if(empty($id)){
          $data=$this->bm->get(null);
          if($data){
