@@ -4,7 +4,6 @@
 
 
 $(function() {
-
     //$("#error-block").hide();
 	$('#form-registro-user').on('submit', function(e) {
 		e.preventDefault();
