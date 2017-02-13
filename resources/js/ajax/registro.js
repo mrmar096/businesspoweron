@@ -5,18 +5,20 @@
 
 $(function() {
     //$("#error-block").hide();
-	$('#form-registro-user').on('submit', function(e) {
+	$('form').on('submit', function(e) {
 		e.preventDefault();
 		var url=this.action;
 		console.log(url);
         var form=$(this);
+		var btn= $(this).children("button[type='submit']");
+		var btnvalue=btn.text();
 		$.ajax({
 			type:'POST',
 			url:url,
 			data:form.serialize(),
 			beforeSend:function () {
 				$("#error-block").hide();
-                $("#registerbtn").val("Registrando...");
+				btn.val("Enviando...");
 			},
 			success:function (response) {
                 var data=JSON.parse(response);
@@ -28,9 +30,8 @@ $(function() {
                     var dismiss='<button type="button" class="close" data-dismiss="alert">×</button>';
 					$("#error-block").html(dismiss+" "+data.mensaje).slideDown();
 				}
-                $("#registerbtn").val("Registrar");
+				btn.val(btnvalue);
 			}
 		});
-
 	});
 });
