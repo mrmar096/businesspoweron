@@ -23,7 +23,7 @@ $(function() {
 				console.log(data);
 				if(data.status==1){
                     console.log(response);
-				}else{
+				 }else{
                     console.log(data.mensaje);
                     var dismiss='<button type="button" class="close" data-dismiss="alert">×</button>';
 					$("#error-block").html(dismiss+" "+data.mensaje).slideDown();

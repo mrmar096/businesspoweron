@@ -1,4 +1,6 @@
 <h1>HOME</h1>
+<?php $this->load->view('login');?>
+
 
 <form id="form-registro-user" method="post" role="form" action="<?=base_url('user/register');?>">7
     <label for="name"> Nombre</label><input name="name" type="text" value="asdfasdf">
