@@ -1,6 +1,6 @@
 
 
-<div class="demo-card-wide mdl-card mdl-shadow--2dp">
+<div  style="margin:0 auto; margin-top: 10%" class="demo-card-wide mdl-card mdl-shadow--2dp">
     <div class="mdl-card__title">
         <h2 class="mdl-card__title-text">Bienvenido</h2>
     </div>
