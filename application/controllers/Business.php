@@ -6,26 +6,24 @@ final class Business extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('Business_model','bm');
     }
-    public function index($id){
-        die("hola");
-     if(empty($id)){
-         $data=$this->bm->get(null);
-         if($data){
-             $this->dashboard($data);
-         }else{
-             show_error("Ninguna empresa encontrada",404);
-         }
-     }else{
-         $data=$this->bm->get($id);
-         if($data){
-             $this->dashboard($data);
-         }else{
-             show_error("Ninguna empresa encontrada",404);
-         }
-     }
+    public function index(){
+        $user=$this->session->userdata("user");
+        $data=$this->bm->get(["user"=>$user->uid]);
+        $this->dashboard($data);
     }
+
+    public function all_business(){
+
+        if($this->session->userdata("user")->type=ADMIN_USER){
+            $data=$this->bm->get(null);
+            $this->dashboard($data);
+
+        }else{
+            redirect($this->agent->referer);
+        }
+    }
+
     public function register(){
         if($this->input->is_ajax_request()){
             //Le asignamos las reglas de validacion
@@ -41,7 +39,7 @@ final class Business extends CI_Controller
                 output_json(['status'=>0,'message'=>validation_errors()]);
             }else{
                 $post=$this->input->post();
-                $post["user"]=$this->session->get_userdata()["uid"];
+                $post["user"]=$this->session->userdata()->uid;
                 if($this->bm->insert($post)){
                     output_json(['status'=>1,'message'=>'Se ha registrado con exito']);
                 }else{
@@ -60,7 +58,7 @@ final class Business extends CI_Controller
                 $this->load->view('business/details',$data);
                 $this->load->view('commons/footer');
             }else{
-               show_error("No se ha encontrado la empresa solicitada",404);
+                show_error("No se ha encontrado la empresa solicitada",404);
             }
         }else{
             redirect($this->agent->referer);
@@ -89,18 +87,11 @@ final class Business extends CI_Controller
             redirect($this->agent->referer);
         }
     }
-    public function all_business(){
-        if($data=$this->bm->get(null)){
-            output_json(["status"=>1,"bussiness"=>$data]);
-        }else{
-            output_json(["status"=>0,"message"=>"No se ha localizado ninguna empresa"]);
-    }
-    }
 
     private function dashboard($data)
     {
         $this->load->view('commons/header');
-        $this->load->view('dashboard/business',$data);
+        $this->load->view('dashboard/business',["data"=>$data]);
         $this->load->view('commons/footer');
     }
 

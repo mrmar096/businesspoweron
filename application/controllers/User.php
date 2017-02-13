@@ -3,17 +3,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 final class User extends CI_Controller
 {
-    const USER=0;
-    const ADMIN = 1;
-
     public function __construct()
     {
         parent::__construct();
-        $this->load->model("User_model","um");
+
     }
     public function index(){
-        $this->home();
-
+        $user=$this->session->userdata("user");
+        if($user["type"]!=ADMIN_USER ){
+            $this->business();
+        }else if($user["type"]==ADMIN_USER){
+            $this->all_business();
+        }else{
+            $this->home();
+        }
     }
 
     public function home(){
@@ -38,7 +41,7 @@ final class User extends CI_Controller
             //Le asignamos los mensajes para las reglas
             $this->form_validation->set_message("required","El campo %s es obligatorio");
             if(!$this->form_validation->run()){
-                    output_json(['status'=>0,'message'=>validation_errors()],400);
+                echo json_encode(['status'=>0,'message'=>validation_errors()]);
             }else{
                 $post=$this->input->post();
                 $email=$post["email"];
@@ -46,16 +49,18 @@ final class User extends CI_Controller
                 $where=array("email"=>$email);
                 if($user=$this->um->get($where)){
                    if($this->encryption->decrypt($user->password)==$password){
-                       $this->session->set_userdata($user);
-                       if($user->type==self::ADMIN){
-                          $this->business();
+                       $this->session->set_userdata("user",$user);
+                       if($user->type==ADMIN_USER){
+                           echo json_encode(['status'=>1,'message'=>"Login exitoso",'url'=>base_url('business/all_devices')]);
                        }else{
-                           $this->business_devices();
+                           echo json_encode(['status'=>1,'message'=>"Login exitoso",'url'=>base_url('business')]);
+
                        }
 
                    }
                 }else{
-                     output_json(['status'=>0,'message'=>'El usuario o la contraseña son incorrectos'],401);
+
+                    echo json_encode(['status'=>0,'message'=>'El usuario o la contraseña son incorrectos']);
                 }
             }
         }else{
@@ -79,9 +84,12 @@ final class User extends CI_Controller
             }else{
                 $post=$this->input->post();
                 $post['uid']=uniqid('user_');
+                $post['type']=0;
+                $password=$post['password'];
+                $post['password']=$this->encryption->encrypt($password);
                 if($this->um->insert($post)){
-                    $this->business_devices($post['uid']);
-                    $this->session->set_userdata($post);
+                    echo json_encode(['status'=>1,'message'=>"Registro exitoso",'url'=>base_url('business')]);
+                    $this->session->set_userdata("user",$post);
                 }else{
                     echo json_encode(['status'=>0,'message'=>'Error interno al insertar']);
                 }
@@ -90,8 +98,8 @@ final class User extends CI_Controller
             redirect(base_url());
         }
     }
-    public function logout($uid){
-        $this->session->unset_userdata(['uid'=>$uid]);
+    public function logout(){
+        $this->session->sess_destroy();
         redirect(base_url('home'));
     }
     public function update($uid){
@@ -106,11 +114,11 @@ final class User extends CI_Controller
             redirect($this->agent->referer);
         }
     }
-    public function business_devices($id){
-        redirect(base_url('business/'.$id));
-    }
     public function business(){
         redirect(base_url('business'));
+    }
+    public function all_business(){
+        redirect(base_url('business/all_business'));
     }
 
 

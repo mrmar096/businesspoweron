@@ -6,12 +6,12 @@ final class Device extends CI_Controller
     const OFF=0;
     const ON=1;
     const WOL_SEND=2;
-    const ADMIN=1;
-    const USER=0;
+
+
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('Device_model','dm');
+    $this->load->model("Device_mode","dm");
     }
 
     public function wakeUp($mac)
@@ -35,7 +35,7 @@ final class Device extends CI_Controller
             }else{
                 output_json(['status'=>0,'No se ha encontrado dispositivos para esta empresa'],404);
             }
-        }else if($this->session->get_userdata()["type"]==self::ADMIN){
+        }else if($this->session->get_userdata()["type"]==ADMIN_USER){
             $data=$this->dm>get(null);
             $this->dashboard($data);
 

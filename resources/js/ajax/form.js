@@ -23,9 +23,12 @@ $(function() {
 				var data=JSON.parse(response);
 				console.log(data);
 				if(data.status==1){
+					if(data.url!=null){
+						window.location.href=data.url;
+					}
 					console.log(response);
 				}else{
-					console.log(data.mensaje);
+					console.log(data.message);
 					var dismiss='<button type="button" class="close" data-dismiss="alert">×</button>';
 					$("#error-block").html(dismiss+" "+data.mensaje).slideDown();
 				}
