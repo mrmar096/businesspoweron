@@ -13,7 +13,26 @@
 
             <!-- Navigation -->
             <div class="android-navigation-container">
-                <a class="mdl-navigation__link" href=""></a>
+                <nav class="mdl-navigation">
+                    <a class="mdl-navigation__link" href="">
+                        <div id="user" class="icon material-icons">supervisor_account</div>
+                        <div class="mdl-tooltip mdl-tooltip--large" for="user">
+                            Usuario
+                        </div>
+                    </a>
+                    <a class="mdl-navigation__link" href="">
+                        <div id="em" class="icon material-icons">settings</div>
+                        <div class="mdl-tooltip mdl-tooltip--large" for="em">
+                            Empresa
+                        </div>
+                    </a>
+                    <a class="mdl-navigation__link" href="<?=base_url('user/logout');?>">
+                        <div id="exit" class="icon material-icons">exit_to_app</div>
+                        <div class="mdl-tooltip mdl-tooltip--large" for="exit">
+                            Salir
+                        </div>
+                    </a>
+                </nav>
             </div>
         </div>
     </div>
