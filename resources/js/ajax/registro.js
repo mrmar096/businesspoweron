@@ -18,7 +18,7 @@ $(function() {
 			data:form.serialize(),
 			beforeSend:function () {
 				$("#error-block").hide();
-				btn.val("Enviando...");
+				btn.text("Enviando...");
 			},
 			success:function (response) {
                 var data=JSON.parse(response);
@@ -30,7 +30,7 @@ $(function() {
                     var dismiss='<button type="button" class="close" data-dismiss="alert">×</button>';
 					$("#error-block").html(dismiss+" "+data.mensaje).slideDown();
 				}
-				btn.val(btnvalue);
+				btn.text(btnvalue);
 			}
 		});
 	});
