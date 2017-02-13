@@ -5,10 +5,11 @@
 
 $(function() {
 
-    $("#error-block").hide();
+    //$("#error-block").hide();
 	$('#form-registro-user').on('submit', function(e) {
 		e.preventDefault();
 		var url=this.action;
+		console.log("hola");
 		console.log(url);
         var form=$(this);
 		$.ajax({

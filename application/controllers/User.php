@@ -61,6 +61,7 @@ final class User extends CI_Controller
         }
     }
     public function register(){
+
         if($this->input->is_ajax_request()){
             //Le asignamos las reglas de validacion
             $this->form_validation->set_rules("name","nombre","required|min_length[2]|max_length[50]|xss_clean");
@@ -72,8 +73,10 @@ final class User extends CI_Controller
             $this->form_validation->set_message("min_length","El campo %s debe tener al menos %s caracteres");
             $this->form_validation->set_message("max_length","El campo %s no debe tener mas de %s caracteres");
             if(!$this->form_validation->run()){
+                die('Correcto');
                 output_json(['status'=>0,'message'=>validation_errors()]);
             }else{
+                die('fail');
                 $post=$this->input->post();
                 $post['uid']=uniqid('_user_');
                 if($this->um->insert($post)){
