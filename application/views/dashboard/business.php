@@ -2,9 +2,18 @@
     <thead>
     <tr>
         <th class="mdl-data-table__cell--non-numeric">Nombre</th>
+        <th>IP</th>
         <th>CIF</th>
         <th>Acciones</th>
     </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td><i class="material-icons">visibility</i><i class="material-icons">settings</i><span/><i class="material-icons">delete</i></td>
+    </tr>
+
+
     </thead>
     <tbody>
 
@@ -20,7 +29,7 @@
     <h3>Añadir Empresa</h3>
     <div class="mdl-card__actions mdl-card--border"></div>
     <div class="mdl-dialog__content">
-        <form id="form" method="post" role="form" action="<?=base_url('user/login');?>">
+        <form id="form" method="post" role="form" action="<?=base_url('business/login');?>">
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                 <input name="name" class="mdl-textfield__input" type="name" id="name">
                 <label class="mdl-textfield__label" for="name">Nombre...</label>
@@ -40,3 +49,22 @@
         </form>
 </dialog>
 
+<script>
+
+    (function() {
+        'use strict';
+        var dialogButton = document.querySelector('.dialog-button');
+        var dialog = document.querySelector('#dialog');
+        if (! dialog.showModal) {
+            dialogPolyfill.registerDialog(dialog);
+        }
+        dialogButton.addEventListener('click', function() {
+            dialog.showModal();
+        });
+        dialog.querySelector('.close')
+            .addEventListener('click', function() {
+                dialog.close();
+            });
+    }());
+
+</script>
