@@ -34,7 +34,7 @@
                     <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
                         for="<?=$i?>">
                         <a href="<?= base_url('business/update'); ?>"> <li class="mdl-menu__item">Editar Empresa</li></a>
-                        <a href="<?= base_url('business/delete/$cif'); ?>"><li class="mdl-menu__item">Eliminar Empresa</li></a>
+                         <li class="mdl-menu__item dialog-del">Eliminar Empresa</li>
                     </ul>
                 </div>
             </div>
@@ -46,6 +46,7 @@
 <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect btn-float dialog-button"><i
         class="material-icons">add</i></button>
 <?php } ?>
+
 
 <dialog id="dialog" class="mdl-dialog">
     <h3>Añadir Empresa</h3>
@@ -74,15 +75,40 @@
     </form>
 </dialog>
 
+
+<dialog id="dialog-del" class="mdl-dialog">
+    <h3>ATENCION</h3>
+    <div class="mdl-card__actions mdl-card--border"></div>
+    <div class="mdl-dialog__content">
+        ¿Estas seguro de eliminar?
+    </div>
+    <div class="mdl-card__actions mdl-card--border"></div>
+    <div class="mdl-dialog__actions">
+        <a href="<?= base_url('business/delete/'); ?>"><button type="submit" class="mdl-button">Eliminar</button></a>
+        <button type="button" class="mdl-button close">Cerrar</button>
+    </div>
+</dialog>
+
+
 <script>
 
     (function () {
         'use strict';
         var dialogButton = document.querySelector('.dialog-button');
+        var dialog_del_Button = document.querySelector('.dialog-del');
+
         var dialog = document.querySelector('#dialog');
+        var dialog_del = document.querySelector('#dialog-del');
+
         if (!dialog.showModal) {
             dialogPolyfill.registerDialog(dialog);
         }
+        if(!dialog_del.showModal){
+            dialogPolyfill.registerDialog(dialog_del);
+        }
+        dialog_del_Button.addEventListener('click', function () {
+            dialog_del.showModal();
+        })
         dialogButton.addEventListener('click', function () {
             dialog.showModal();
         });
@@ -90,6 +116,12 @@
             .addEventListener('click', function () {
                 dialog.close();
             });
+
+        dialog_del.querySelector('.close')
+            .addEventListener('click', function () {
+                dialog_del.close();
+            });
+
     }());
 
 </script>
