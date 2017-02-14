@@ -15,7 +15,7 @@ final class Business_model extends CI_Model
         if(is_null($id)){
             return $this->db->get(self::TABLE)->result();
         }else{
-            return $this->db->get_where(self::TABLE,$id)->row();
+            return $this->db->get_where(self::TABLE,$id)->result();
         }
     }
 
