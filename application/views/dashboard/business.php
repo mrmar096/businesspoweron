@@ -14,17 +14,17 @@
                     Aenan convallis.
                 </div>
                 <div class="mdl-card__actions mdl-card--border">
-                    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                    <a href="<?=base_url('Device/devices', $data[$i]->cif);?>" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
                         Ver Dispositivos
                     </a>
                 </div>
                 <div class="mdl-card__menu">
-                    <button id="business-actions" class="mdl-button mdl-js-button mdl-button--icon">
+                    <button id="<?=$i?>" class="mdl-button mdl-js-button mdl-button--icon">
                         <i class="material-icons">more_vert</i>
                     </button>
 
                     <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
-                        for="business-actions">
+                        for="<?=$i?>">
                         <li class="mdl-menu__item">Editar Empresa</li>
                         <li class="mdl-menu__item">Eliminar Empresa</li>
                     </ul>
