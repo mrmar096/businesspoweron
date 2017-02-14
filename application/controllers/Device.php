@@ -99,7 +99,7 @@ final class Device extends CI_Controller
     private function dashboard($data)
     {
         $this->load->view('commons/header');
-        $this->load->view('dashboard/devices',$data);
+        $this->load->view('dashboard/devices',["data"=>$data]);
         $this->load->view('commons/footer');
     }
 }
