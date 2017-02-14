@@ -31,15 +31,15 @@ final class Business_model extends CI_Model
     public function get_obj($id){
         return $this->db->get_where(self::TABLE,$id)->row();
     }
-    public function insert($data)
+    public function insert($data=null)
     {
         return $this->db->insert(self::TABLE,$data);
     }
-    public function update($data,$where)
+    public function update($data,$where=null)
     {
         return $this->db->update(self::TABLE,$data,$where);
     }
-    public function delete($where)
+    public function delete($where=null)
     {
         $this->db->delete(self::TABLE,$where);
         return $this->db->affected_rows()>0;
