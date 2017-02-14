@@ -6,7 +6,7 @@
         <div class="mdl-layout__header-row">
 				<span class="android-title mdl-layout-title title-font"> <img
                         class="android-logo-image" src="<?=base_url('resources/img/logo_blank.png');?>"> <span
-                        class="title-font"></span>
+                        class="title-font">Bienvenido <?=$this->session->userdata("user")->name;?></span>
 				</span>
             <!-- Add spacer, to align navigation to the right in desktop -->
             <div class="android-header-spacer mdl-layout-spacer"></div>
@@ -14,6 +14,12 @@
             <!-- Navigation -->
             <div class="android-navigation-container">
                 <nav class="mdl-navigation">
+
+                    <?php if($this->session->userdata("user")->type == ADMIN_USER) { ?>
+                        <a class="mdl-navigation__link" href="">
+                            <div id="admin" class="icon material-icons">child_care</div>
+                        </a>
+                    <?php }?>
                     <a class="mdl-navigation__link" href="">
                         <div id="user" class="icon material-icons">supervisor_account</div>
                         <div class="mdl-tooltip mdl-tooltip--large" for="user">
