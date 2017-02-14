@@ -42,7 +42,7 @@ final class Device extends CI_Controller
             }
         }else{
             if($this->input->is_ajax_request()){
-                output_error_json(['status'=>0,'No se ha encontrado el dispositivo'],404);
+                output_error_json(['status'=>0,'No tienes ninguna empresa registrada']);
             }else{
                 redirect($this->agent->referer);
             }
