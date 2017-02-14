@@ -11,7 +11,8 @@ final class Device extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-    $this->load->model("Device_mode","dm");
+        $this->load->model("Device_mode","dm");
+
     }
 
     public function wakeUp($mac)
@@ -25,22 +26,18 @@ final class Device extends CI_Controller
             $this->dm->update(['status'=>self::ON,"last_power_on"=>time()],$mac);
             output_json(['status'=>1,'Se ha enviado la solicitud']);
         }else{
-            output_json(['status'=>0,'No se ha encontrado el dispositivo'],404);
+            output_error_json(['status'=>0,'No se ha encontrado el dispositivo'],404);
         }
     }
-    public function devices($cif){
-        if(!empty($cif)){
-            if($data=$this->dm>get(["cif"=>$cif])){
-                $this->dashboard($data);
-            }else{
-                output_json(['status'=>0,'No se ha encontrado dispositivos para esta empresa'],404);
-            }
-        }else if($this->session->get_userdata()["type"]==ADMIN_USER){
+    public function index(){
+        $user=$this->session->userdata("user");
+        if($user->type==ADMIN_USER){
             $data=$this->dm>get(null);
             $this->dashboard($data);
-
+        }else if($data=$this->dm>get(["user"=>$user->uid])){
+            $this->dashboard($data);
         }else{
-            output_json(['status'=>0,'No se ha especificado un cif'],401);
+            output_error_json(['status'=>0,'No se ha encontrado dispositivos para esta empresa'],404);
         }
     }
     public function register($cif){
@@ -59,9 +56,9 @@ final class Device extends CI_Controller
             }else{
                 $post=$this->input->post();
                 if($this->dm->insert($post)){
-                    $this->devices($cif);
+                    $this->index($cif);
                 }else{
-                    output_json(['status'=>0,'message'=>"Error interno al insertar"]);
+                    output_error_json(['status'=>0,'message'=>"Error interno al insertar"]);
                 }
             }
         }else{
@@ -73,7 +70,7 @@ final class Device extends CI_Controller
             if($this->dm->delete(["mac"=>$mac])){
                 output_json(['status'=>1,'message'=>"Eliminado con exito"]);
             }else{
-                output_json(['status'=>0,'message'=>"Ningun elemento ha sido eliminado"],400);
+                output_error_json(['status'=>0,'message'=>"Ningun elemento ha sido eliminado"],400);
             }
         }else{
             redirect($this->agent->referer);
@@ -85,7 +82,7 @@ final class Device extends CI_Controller
             if($this->dm->update($data,["mac"=>$mac])){
                 output_json(['status'=>1,'message'=>"Actualizado con exito"]);
             }else{
-                output_json(['status'=>0,'message'=>"No se acualizó ningun elemento"],400);
+                output_error_json(['status'=>0,'message'=>"No se acualizó ningun elemento"],400);
             }
         }else{
             redirect($this->agent->referer);
