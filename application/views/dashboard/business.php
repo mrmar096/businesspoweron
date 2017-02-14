@@ -1,28 +1,38 @@
 
-<table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp tabla-size">
-    <thead>
+<main>
 
-    <tr>
-        <th class="mdl-data-table__cell--non-numeric">Nombre</th>
-        <th>IP</th>
-        <th>CIF</th>
-        <th>Acciones</th>
-    </tr>
-    </thead>
-    <tbody>
-    <?php for($i=0;$i<count($data);$i++){?>
-        <tr>
-        <td><?=$data[$i]->name?></td>
-            <td><?=$data[$i]->ip?></td>
-            <td><?=$data[$i]->cif?></td>
-            <td><i class="material-icons">visibility</i><i class="material-icons">settings</i><span/><i class="material-icons">delete</i></td>
-        </tr>
-    <?php }?>
-    </tbody>
+    <div class="mdl-grid">
 
+        <?php for($i=0;$i<count($data);$i++){?>
 
-</table>
+            <div class="demo-card-square mdl-card mdl-shadow--2dp mdl-cell--4-col">
+                <div class="mdl-card__title mdl-card--expand">
+                    <h2 class="mdl-card__title-text"><?=$data[$i]->name?></h2>
+                </div>
+                <div class="mdl-card__supporting-text">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Aenan convallis.
+                </div>
+                <div class="mdl-card__actions mdl-card--border">
+                    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                        Ver Dispositivos
+                    </a>
+                </div>
+                <div class="mdl-card__menu">
+                    <button id="business-actions" class="mdl-button mdl-js-button mdl-button--icon">
+                        <i class="material-icons">more_vert</i>
+                    </button>
 
+                    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
+                        for="business-actions">
+                        <li class="mdl-menu__item">Editar Empresa</li>
+                        <li class="mdl-menu__item">Eliminar Empresa</li>
+                    </ul>
+                </div>
+            </div>
+        <?php }?>
+    </div>
+</main>
 
 <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect btn-float dialog-button"><i class="material-icons">add</i></button>
 
@@ -41,7 +51,10 @@
                 <input name="cif" class="mdl-textfield__input" type="text" id="cif">
                 <label class="mdl-textfield__label" for="cif">Cif...</label>
             </div>
-
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input name="ip" class="mdl-textfield__input" type="text" id="ip">
+                <label class="mdl-textfield__label" for="cif">Ip...</label>
+            </div>
     </div>
     <div class="mdl-card__actions mdl-card--border"></div>
 

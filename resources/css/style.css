@@ -3,9 +3,6 @@
     margin-top: 10%;
 }
 
-.tabla-size{
-    width: 100%;
-}
 
 .btn-float{
     position: fixed!important;
@@ -16,3 +13,16 @@
     margin-bottom: 40px!important;
     z-index: 900;
 }
+
+
+.demo-card-square.mdl-card {
+    width: 320px;
+    height: 320px;
+    margin-left: 20px;
+}
+.demo-card-square > .mdl-card__title {
+    color: #fff;
+    background:
+            url('../img/flats.png') bottom right 15% no-repeat #f50;
+}
+
