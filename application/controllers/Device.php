@@ -31,22 +31,26 @@ final class Device extends CI_Controller
     }
     public function index(){
         $user=$this->session->userdata("user");
-        $business=$this->bm->get_obj(["user"=>$user->uid]);
-        if($business){
-            if($user->type==ADMIN_USER){
-                $data=$this->dm->get(null);
-                $this->dashboard($data);
-            }else{
+        if($user->type==ADMIN_USER){
+            $data=$this->dm->get(null);
+            $this->dashboard($data);
+        }else{
+            $business=$this->bm->get_obj(["user"=>$user->uid]);
+            if($business){
                 $data=$this->dm->get(["cif"=>$business->cif]);
                 $this->dashboard($data);
-            }
-        }else{
-            if($this->input->is_ajax_request()){
-                output_error_json(['status'=>0,'No tienes ninguna empresa registrada']);
             }else{
-                redirect($this->agent->referer);
+                if($this->input->is_ajax_request()){
+                    output_error_json(['status'=>0,'No tienes ninguna empresa registrada']);
+                }else{
+                    redirect($this->agent->referer);
+                }
             }
+
         }
+
+
+
     }
     public function register($cif){
         if($this->input->is_ajax_request()){
