@@ -15,10 +15,9 @@ final class Business extends CI_Controller
 
     public function all_business(){
 
-        if($this->session->userdata("user")->type=ADMIN_USER){
+        if($this->session->userdata("user")->type==ADMIN_USER){
             $data=$this->bm->get(null);
             $this->dashboard($data);
-
         }else{
             redirect($this->agent->referer);
         }
@@ -29,7 +28,7 @@ final class Business extends CI_Controller
             //Le asignamos las reglas de validacion
             $this->form_validation->set_rules("cif","cif","required|min_length[2]|max_length[50]|xss_clean|is_unique[business.cif]");
             $this->form_validation->set_rules("email","email","required|min_length[2]|max_length[100]|xss_clean");
-            $this->form_validation->set_rules("password","password","required|min_length[6]|xss_clean|max_length[25]");
+
             //Le asignamos los mensajes para las reglas
             $this->form_validation->set_message("required","El campo %s es obligatorio");
             $this->form_validation->set_message("is_unique","El cif proporcionado ya esta registrado en nuestro sistema");

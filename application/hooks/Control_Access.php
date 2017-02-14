@@ -8,7 +8,7 @@
  */
 class Control_Access
 {
-    private $grant=array("","home","user/login","user/register");
+    private $grant=array("index","home","user/login","user/register");
 
 
     function __get($name)
@@ -20,7 +20,7 @@ class Control_Access
         $uri=$_SERVER["REQUEST_URI"];
         $peticion=substr($uri,strpos($uri,"/",1)+1);
         if(!in_array($peticion,$this->grant) ){
-            if(!$data=$this->session->userdata("user")){
+            if(!$this->session->userdata("user")){
                 redirect(base_url('home'));
             }
         }

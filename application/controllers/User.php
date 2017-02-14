@@ -9,13 +9,14 @@ final class User extends CI_Controller
 
     }
     public function index(){
+        $this->home();
+    }
+    public function main(){
         $user=$this->session->userdata("user");
         if($user->type!=ADMIN_USER ){
             $this->business();
-        }else if($user->type==ADMIN_USER){
-            $this->all_business();
         }else{
-            $this->home();
+            $this->all_business();
         }
     }
 
@@ -50,12 +51,9 @@ final class User extends CI_Controller
                 if($user=$this->um->get($where)){
                    if($this->encryption->decrypt($user->password)==$password){
                        $this->session->set_userdata("user",$user);
-                       if($user->type==ADMIN_USER){
-                           echo json_encode(['status'=>1,'message'=>"Login exitoso",'url'=>base_url('business/all_devices')]);
-                       }else{
-                           echo json_encode(['status'=>1,'message'=>"Login exitoso",'url'=>base_url('business')]);
 
-                       }
+                           echo json_encode(['status'=>1,'message'=>"Login exitoso",'url'=>base_url('main')]);
+
 
                    }
                 }else{
@@ -88,7 +86,7 @@ final class User extends CI_Controller
                 $password=$post['password'];
                 $post['password']=$this->encryption->encrypt($password);
                 if($this->um->insert($post)){
-                    echo json_encode(['status'=>1,'message'=>"Registro exitoso",'url'=>base_url('business')]);
+                    echo json_encode(['status'=>1,'message'=>"Registro exitoso",'url'=>base_url('main')]);
                     $this->session->set_userdata("user",$post);
                 }else{
                     echo json_encode(['status'=>0,'message'=>'Error interno al insertar']);
@@ -100,7 +98,7 @@ final class User extends CI_Controller
     }
     public function logout(){
         $this->session->sess_destroy();
-        redirect(base_url('home'));
+        redirect(base_url());
     }
     public function update($uid){
         if($this->input->is_ajax_request()){

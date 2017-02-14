@@ -1,23 +1,26 @@
+
 <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp tabla-size">
     <thead>
+
     <tr>
         <th class="mdl-data-table__cell--non-numeric">Nombre</th>
         <th>IP</th>
         <th>CIF</th>
         <th>Acciones</th>
     </tr>
-    <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td><i class="material-icons">visibility</i><i class="material-icons">settings</i><span/><i class="material-icons">delete</i></td>
-    </tr>
-
-
     </thead>
     <tbody>
-
+    <?php for($i=0;$i<count($data);$i++){?>
+        <tr>
+        <td><?=$data->name?></td>
+            <td><?=$data->cif?></td>
+            <td><?=$data->cif?></td>
+            <td><i class="material-icons">visibility</i><i class="material-icons">settings</i><span/><i class="material-icons">delete</i></td>
+        </tr>
+    <?php }?>
     </tbody>
+
+
 </table>
 
 
