@@ -46,7 +46,7 @@ final class User extends CI_Controller
             //Le asignamos los mensajes para las reglas
             $this->form_validation->set_message("required","El campo %s es obligatorio");
             if(!$this->form_validation->run()){
-                echo json_encode(['status'=>0,'message'=>validation_errors()]);
+                output_error_json(['status'=>0,'message'=>validation_errors()]);
             }else{
                 $post=$this->input->post();
                 $email=$post["email"];
@@ -55,14 +55,11 @@ final class User extends CI_Controller
                 if($user=$this->um->get($where)){
                     if($this->encryption->decrypt($user->password)==$password){
                         $this->session->set_userdata("user",$user);
-
-                        echo json_encode(['status'=>1,'message'=>"Login exitoso",'url'=>base_url('main')]);
-
-
+                        output_json(['status'=>1,'message'=>'Login exitoso','url'=>base_url('main')]);
                     }
                 }else{
 
-                    echo json_encode(['status'=>0,'message'=>'El usuario o la contraseña son incorrectos']);
+                    output_error_json(['status'=>0,'message'=>'El usuario o la contraseña son incorrectos']);
                 }
             }
         }else{
@@ -82,7 +79,7 @@ final class User extends CI_Controller
             $this->form_validation->set_message("min_length","El campo %s debe tener al menos %s caracteres");
             $this->form_validation->set_message("max_length","El campo %s no debe tener mas de %s caracteres");
             if(!$this->form_validation->run()){
-                echo json_encode(['status'=>0,'message'=>validation_errors()]);
+                output_error_json(['status'=>0,'message'=>validation_errors()]);
             }else{
                 $post=$this->input->post();
                 $post['uid']=uniqid('user_');
@@ -92,9 +89,11 @@ final class User extends CI_Controller
                 if($this->um->insert($post)){
                     $user=$this->um->get(["uid"=>$post["uid"]]);
                     $this->session->set_userdata("user",$user);
-                    echo json_encode(['status'=>1,'message'=>"Registro exitoso",'url'=>base_url('main')]);
+                    output_json(['status'=>1,'message'=>'Registro exitoso','url'=>base_url('main')]);
                 }else{
-                    echo json_encode(['status'=>0,'message'=>'Error interno al insertar']);
+                    output_json($post);
+
+                    output_error_json(['status'=>0,'message'=>'Error interno al insertar']);
                 }
             }
         }else{
