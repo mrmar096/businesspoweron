@@ -34,7 +34,7 @@
                     <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
                         for="<?=$i?>">
                         <a href="<?= base_url('business/update'); ?>"> <li class="mdl-menu__item">Editar Empresa</li></a>
-                        <li class="mdl-menu__item dialog-del">Eliminar Empresa</li>
+                        <a href="<?= base_url('business/delete/'.$data[$i]->cif);?>" class="dialog-del"> <li class="mdl-menu__item">Eliminar Empresa</li></a>
                     </ul>
                 </div>
             </div>
@@ -84,7 +84,7 @@
     </div>
     <div class="mdl-card__actions mdl-card--border"></div>
     <div class="mdl-dialog__actions">
-        <a href="<?= base_url('business/delete/'); ?>"><button type="submit" class="mdl-button">Eliminar</button></a>
+        <a href="" class="confirm-delete mdl-button">Eliminar</a>
         <button type="button" class="close mdl-button">Cerrar</button>
     </div>
 </dialog>

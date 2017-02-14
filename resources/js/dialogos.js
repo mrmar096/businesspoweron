@@ -1,8 +1,6 @@
 
 (function () {
     'use strict';
-
-
     //Declare Dialog Register
     var dialog = document.querySelector('#dialog');
     var dialogButton = document.querySelector('.dialog-button');
@@ -24,15 +22,20 @@
 
     }
     if(dialog_del && dialog_del_Button){
+
         if(!dialog_del.showModal){
             dialogPolyfill.registerDialog(dialog_del);
         }
-        dialog_del_Button.addEventListener('click', function () {
+        dialog_del_Button.addEventListener('click', function (e) {
+            e.preventDefault();
+            var url=this.href;
+            console.log(url);
+            var a=dialog_del.querySelector("a.confirm-delete");
+            a.href=url;
             dialog_del.showModal();
         });
         dialog_del.querySelector('.close')
             .addEventListener('click', function () {
-               
                 dialog_del.close();
             });
     }
