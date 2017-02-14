@@ -10,9 +10,9 @@ final class User extends CI_Controller
     }
     public function index(){
         $user=$this->session->userdata("user");
-        if($user["type"]!=ADMIN_USER ){
+        if($user->type!=ADMIN_USER ){
             $this->business();
-        }else if($user["type"]==ADMIN_USER){
+        }else if($user->type==ADMIN_USER){
             $this->all_business();
         }else{
             $this->home();
