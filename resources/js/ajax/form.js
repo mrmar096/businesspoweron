@@ -20,6 +20,7 @@ $(function() {
 				btn.text("Espere...");
 			},
 			success:function (response) {
+				console.log(response);
 				var data=JSON.parse(response);
 				console.log(data);
 				if(data.status==1){
