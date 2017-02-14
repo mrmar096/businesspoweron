@@ -21,9 +21,13 @@ final class User extends CI_Controller
     }
 
     public function home(){
-        $this->load->view("commons/header");
-        $this->load->view("home");
-        $this->load->view("commons/footer");
+        if($user=$this->session->userdata("user")){
+            $this->main();
+        }else{
+            $this->load->view("commons/header");
+            $this->load->view("home");
+            $this->load->view("commons/footer");
+        }
     }
     public function delete($param)
     {
@@ -49,13 +53,13 @@ final class User extends CI_Controller
                 $password=$post["password"];
                 $where=array("email"=>$email);
                 if($user=$this->um->get($where)){
-                   if($this->encryption->decrypt($user->password)==$password){
-                       $this->session->set_userdata("user",$user);
+                    if($this->encryption->decrypt($user->password)==$password){
+                        $this->session->set_userdata("user",$user);
 
-                           echo json_encode(['status'=>1,'message'=>"Login exitoso",'url'=>base_url('main')]);
+                        echo json_encode(['status'=>1,'message'=>"Login exitoso",'url'=>base_url('main')]);
 
 
-                   }
+                    }
                 }else{
 
                     echo json_encode(['status'=>0,'message'=>'El usuario o la contraseña son incorrectos']);
@@ -86,8 +90,9 @@ final class User extends CI_Controller
                 $password=$post['password'];
                 $post['password']=$this->encryption->encrypt($password);
                 if($this->um->insert($post)){
+                    $user=$this->um->get(["uid"=>$post["uid"]]);
+                    $this->session->set_userdata("user",$user);
                     echo json_encode(['status'=>1,'message'=>"Registro exitoso",'url'=>base_url('main')]);
-                    $this->session->set_userdata("user",$post);
                 }else{
                     echo json_encode(['status'=>0,'message'=>'Error interno al insertar']);
                 }

@@ -12,9 +12,9 @@
     <tbody>
     <?php for($i=0;$i<count($data);$i++){?>
         <tr>
-        <td><?=$data->name?></td>
-            <td><?=$data->cif?></td>
-            <td><?=$data->cif?></td>
+        <td><?=$data[$i]->name?></td>
+            <td><?=$data[$i]->ip?></td>
+            <td><?=$data[$i]->cif?></td>
             <td><i class="material-icons">visibility</i><i class="material-icons">settings</i><span/><i class="material-icons">delete</i></td>
         </tr>
     <?php }?>
