@@ -27,7 +27,7 @@ final class Business extends CI_Controller
         if($this->input->is_ajax_request()){
             //Le asignamos las reglas de validacion
             $this->form_validation->set_rules("cif","cif","required|min_length[2]|max_length[50]|xss_clean|is_unique[business.cif]");
-            $this->form_validation->set_rules("email","email","required|min_length[2]|max_length[100]|xss_clean");
+            $this->form_validation->set_rules("name","name","min_length[2]|max_length[100]|xss_clean");
             $this->form_validation->set_rules("ip","ip","min_length[2]|max_length[20]|xss_clean");
             //Le asignamos los mensajes para las reglas
             $this->form_validation->set_message("required","El campo %s es obligatorio");
@@ -38,10 +38,10 @@ final class Business extends CI_Controller
                 output_json(['status'=>0,'message'=>validation_errors()]);
             }else{
                 $post=$this->input->post();
-                $post["user"]=$this->session->userdata()->uid;
+                $post["user"]=$this->session->userdata("user")->uid;
                 if($this->bm->insert($post)){
                     $business=$this->bm->get(['cif'=>$post['cif']]);
-                    output_json(['status'=>1,'message'=>'Se ha registrado con exito','business'=>$business]);
+                    output_json(['status'=>1,'message'=>'Se ha registrado con exito',"url"=>base_url('business')]);
                 }else{
                     output_error_json(['status'=>0,'message'=>'Error interno al insertar'],400);
                 }
