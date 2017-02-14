@@ -76,12 +76,22 @@ final class Business extends CI_Controller
             redirect($this->agent->referer);
         }
     }
-    public function delete($cif){
+    public function delete($cif=null){
         if($this->input->is_ajax_request()){
-            if($this->bm->delete(["cif"=>$cif])){
-                output_json(['status'=>1,'message'=>"Eliminado con exito"]);
+            if(is_null($cif)&& $this->session->userdata("user")->type==ADMIN_USER){
+                if($this->bm->delete()){
+                    output_json(['status'=>1,'message'=>"Se eliminaron todas las con exito"]);
+                }else{
+                    output_error_json(['status'=>0,'message'=>"Ningun elemento ha sido eliminado"],400);
+                }
+            }else if(!is_null($cif)){
+                if($this->bm->delete(["cif"=>$cif])){
+                    output_json(['status'=>1,'message'=>"Eliminado con exito"]);
+                }else{
+                    output_error_json(['status'=>0,'message'=>"Ningun elemento ha sido eliminado"],400);
+                }
             }else{
-                output_error_json(['status'=>0,'message'=>"Ningun elemento ha sido eliminado"],400);
+                output_error_json(['status'=>0,'message'=>"No estas autorizado"],401);
             }
         }else{
             redirect($this->agent->referer);
