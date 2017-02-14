@@ -34,7 +34,7 @@
                     <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
                         for="<?=$i?>">
                         <a href="<?= base_url('business/update'); ?>"> <li class="mdl-menu__item">Editar Empresa</li></a>
-                        <a href="<?= base_url('business/delete'); ?>"><li class="mdl-menu__item">Eliminar Empresa</li></a>
+                        <a href="<?= base_url('business/delete/$cif'); ?>"><li class="mdl-menu__item">Eliminar Empresa</li></a>
                     </ul>
                 </div>
             </div>
@@ -42,9 +42,10 @@
     </div>
 </main>
 
+<?php  if((count($data) == 0)){?>
 <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect btn-float dialog-button"><i
         class="material-icons">add</i></button>
-
+<?php } ?>
 
 <dialog id="dialog" class="mdl-dialog">
     <h3>Añadir Empresa</h3>
