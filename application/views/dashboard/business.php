@@ -14,10 +14,10 @@
                     </span>
 
                     <span class="mdl-chip">
-                       <span class="mdl-chip__text"><strong>IP: </strong><?= $data[$i]->ip?></span>
+                       <span class="mdl-chip__text"><strong>IP: </strong><?=$data[$i]->ip?></span>
                     </span>
                     <span class="mdl-chip">
-                       <span class="mdl-chip__text"><strong>Dispositivos: </strong><?= $data[$i]->devices?></span>
+                       <span class="mdl-chip__text"><strong>Dispositivos: </strong><?=$data[$i]->devices?></span>
                     </span>
                 </div>
                 <div class="mdl-card__actions mdl-card--border">
@@ -32,7 +32,7 @@
                     </button>
 
                     <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
-                        for="<?= $i ?>">
+                        for="<?=$i?>">
                         <a href="<?= base_url('business/update'); ?>"> <li class="mdl-menu__item">Editar Empresa</li></a>
                         <a href="<?= base_url('business/delete'); ?>"><li class="mdl-menu__item">Eliminar Empresa</li></a>
                     </ul>

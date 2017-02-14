@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-final class Business_model extends CI_Model 
+final class Business_model extends CI_Model
 {
     const TABLE = 'business';
 
@@ -14,13 +14,17 @@ final class Business_model extends CI_Model
     {
         if(is_null($id)){
             $data= $this->db->get(self::TABLE)->result();
-            for($i=0;$i<count($data);$i++){
-                $data[$i]->devices=$this->db->get_where('devices',["cif"=>$data[$i]->cif])->num_rows();
+            if($data){
+
+
+                for($i=0;$i<count($data);$i++){
+                    $data[$i]->devices=$this->db->get_where('devices',["cif"=>$data[$i]->cif])->num_rows();
+                }
             }
             return $data;
         }else{
             $data= $this->db->get_where(self::TABLE,$id)->result();
-            $data[0]->devices=$this->db->get_where('devices',["cif"=>$data[0]->cif])->num_rows();
+            if($data)$data[0]->devices=$this->db->get_where('devices',["cif"=>$data[0]->cif])->num_rows();
             return $data;
         }
     }
