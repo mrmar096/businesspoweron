@@ -11,7 +11,7 @@ final class Device extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model("Device_mode","dm");
+
 
     }
 
@@ -31,13 +31,21 @@ final class Device extends CI_Controller
     }
     public function index(){
         $user=$this->session->userdata("user");
-        if($user->type==ADMIN_USER){
-            $data=$this->dm>get(null);
-            $this->dashboard($data);
-        }else if($data=$this->dm>get(["user"=>$user->uid])){
-            $this->dashboard($data);
+        $business=$this->bm->get_obj(["user"=>$user->uid]);
+        if($business){
+            if($user->type==ADMIN_USER){
+                $data=$this->dm->get(null);
+                $this->dashboard($data);
+            }else{
+                $data=$this->dm->get(["cif"=>$business->cif]);
+                $this->dashboard($data);
+            }
         }else{
-            output_error_json(['status'=>0,'No se ha encontrado dispositivos para esta empresa'],404);
+            if($this->input->is_ajax_request()){
+                output_error_json(['status'=>0,'No se ha encontrado el dispositivo'],404);
+            }else{
+                redirect($this->agent->referer);
+            }
         }
     }
     public function register($cif){

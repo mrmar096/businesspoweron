@@ -42,7 +42,7 @@
     <h3>Añadir Empresa</h3>
     <div class="mdl-card__actions mdl-card--border"></div>
     <div class="mdl-dialog__content">
-        <form id="form" method="post" role="form" action="<?=base_url('business/login');?>">
+        <form id="form" method="post" role="form" action="<?=base_url('business/register');?>">
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                 <input name="name" class="mdl-textfield__input" type="name" id="name">
                 <label class="mdl-textfield__label" for="name">Nombre...</label>

@@ -28,7 +28,7 @@ final class Business extends CI_Controller
             //Le asignamos las reglas de validacion
             $this->form_validation->set_rules("cif","cif","required|min_length[2]|max_length[50]|xss_clean|is_unique[business.cif]");
             $this->form_validation->set_rules("email","email","required|min_length[2]|max_length[100]|xss_clean");
-
+            $this->form_validation->set_rules("ip","ip","min_length[2]|max_length[20]|xss_clean");
             //Le asignamos los mensajes para las reglas
             $this->form_validation->set_message("required","El campo %s es obligatorio");
             $this->form_validation->set_message("is_unique","El cif proporcionado ya esta registrado en nuestro sistema");
@@ -40,9 +40,10 @@ final class Business extends CI_Controller
                 $post=$this->input->post();
                 $post["user"]=$this->session->userdata()->uid;
                 if($this->bm->insert($post)){
-                    output_json(['status'=>1,'message'=>'Se ha registrado con exito']);
+                    $business=$this->bm->get(['cif'=>$post['cif']]);
+                    output_json(['status'=>1,'message'=>'Se ha registrado con exito','business'=>$business]);
                 }else{
-                    output_json(['status'=>0,'message'=>'Error interno al insertar'],400);
+                    output_error_json(['status'=>0,'message'=>'Error interno al insertar'],400);
                 }
             }
         }else{
@@ -69,7 +70,7 @@ final class Business extends CI_Controller
             if($this->bm->update($data,["cif"=>$cif])){
                 output_json(['status'=>1,'message'=>"Actualizado con exito"]);
             }else{
-                output_json(['status'=>0,'message'=>"No se acualizó ningun elemento"],400);
+                output_error_json(['status'=>0,'message'=>"No se acualizó ningun elemento"],400);
             }
         }else{
             redirect($this->agent->referer);
@@ -80,7 +81,7 @@ final class Business extends CI_Controller
             if($this->bm->delete(["cif"=>$cif])){
                 output_json(['status'=>1,'message'=>"Eliminado con exito"]);
             }else{
-                output_json(['status'=>0,'message'=>"Ningun elemento ha sido eliminado"],400);
+                output_error_json(['status'=>0,'message'=>"Ningun elemento ha sido eliminado"],400);
             }
         }else{
             redirect($this->agent->referer);

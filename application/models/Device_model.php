@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-final class Devices_model extends CI_Model 
+final class Device_model extends CI_Model
 {
     const TABLE = 'devices';
 
@@ -16,10 +16,12 @@ final class Devices_model extends CI_Model
         if(is_null($id)){
             return $this->db->get(self::TABLE)->result();
         }else{
-            return $this->db->get_where(self::TABLE,$id)->row();
+            return $this->db->get_where(self::TABLE,$id)->result();
         }
     }
-
+    public function get_obj($id){
+        return $this->db->get_where(self::TABLE,$id)->row();
+    }
     public function insert($data)
     {
         return $this->db->insert(self::TABLE,$data);

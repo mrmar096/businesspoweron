@@ -18,7 +18,9 @@ final class Business_model extends CI_Model
             return $this->db->get_where(self::TABLE,$id)->result();
         }
     }
-
+    public function get_obj($id){
+        return $this->db->get_where(self::TABLE,$id)->row();
+    }
     public function insert($data)
     {
         return $this->db->insert(self::TABLE,$data);

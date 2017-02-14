@@ -22,7 +22,9 @@ final class User_model extends CI_Model
     public function insert($user){
         return $this->db->insert(self::TABLE,$user);
     }
-
+    public function get_obj($id){
+        return $this->db->get_where(self::TABLE,$id)->row();
+    }
     public function update($values,$id,$username=null){
         $this->db->set($values);
         if(is_null($username)){
