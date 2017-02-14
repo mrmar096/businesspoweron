@@ -16,6 +16,9 @@
                     <span class="mdl-chip">
                        <span class="mdl-chip__text"><strong>IP: </strong><?= $data[$i]->ip?></span>
                     </span>
+                    <span class="mdl-chip">
+                       <span class="mdl-chip__text"><strong>Dispositivos: </strong><?= $data[$i]->devices?></span>
+                    </span>
                 </div>
                 <div class="mdl-card__actions mdl-card--border">
                     <a href="<?= base_url('devices'); ?>"
@@ -30,8 +33,8 @@
 
                     <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
                         for="<?= $i ?>">
-                        <li class="mdl-menu__item">Editar Empresa</li>
-                        <li class="mdl-menu__item">Eliminar Empresa</li>
+                        <a href="<?= base_url('business/update'); ?>"> <li class="mdl-menu__item">Editar Empresa</li></a>
+                        <a href="<?= base_url('business/delete'); ?>"><li class="mdl-menu__item">Eliminar Empresa</li></a>
                     </ul>
                 </div>
             </div>
@@ -47,7 +50,7 @@
     <h3>Añadir Empresa</h3>
     <div class="mdl-card__actions mdl-card--border"></div>
     <div class="mdl-dialog__content">
-        <form id="form" method="post" role="form" action="<?= base_url('business/login'); ?>">
+        <form id="form" method="post" role="form" action="<?= base_url('business/register'); ?>">
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                 <input name="name" class="mdl-textfield__input" type="name" id="name">
                 <label class="mdl-textfield__label" for="name">Nombre...</label>
