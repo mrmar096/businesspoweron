@@ -55,7 +55,7 @@
     <div class="mdl-dialog__content">
         <form id="form" method="post" role="form" action="<?= base_url('devices/register'); ?>">
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                <input name="mac" class="mdl-textfield__input mask_address" type="name" id="mac">
+                <input name="mac" class="mdl-textfield__input mask_address" type="text" id="mac">
                 <label class="mdl-textfield__label" for="mac">Mac...</label>
             </div>
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">

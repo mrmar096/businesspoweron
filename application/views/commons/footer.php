@@ -27,7 +27,7 @@
             }
         });
         $('.ip_address').mask('099.099.099.099');
-        $('.mask_address').mask('00:00:00:00:00:00');
+        $('.mask_address').mask('AA:AA:AA:AA:AA:AA');
 
     });
 </script>
