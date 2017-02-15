@@ -8,7 +8,6 @@
 
 
 
-
 </div>
 </div>
 <script type="text/javascript" src="<?=base_url('bower_components/jquery/dist/jquery.js')?>"></script>

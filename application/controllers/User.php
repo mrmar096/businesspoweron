@@ -38,6 +38,7 @@ final class User extends CI_Controller
             $this->um->delete(null,$param);
         }
     }
+
     public function login(){
         if($this->input->is_ajax_request()){
             //Le asignamos las reglas de validacion

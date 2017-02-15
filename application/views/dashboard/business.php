@@ -4,6 +4,7 @@
 
         <?php for ($i = 0; $i < count($data); $i++) { ?>
 
+
             <div class="demo-card-square mdl-card mdl-shadow--2dp mdl-cell--4-col">
                 <div class="mdl-card__title mdl-card--expand">
                     <h2 class="mdl-card__title-text"><?= $data[$i]->name ?></h2>

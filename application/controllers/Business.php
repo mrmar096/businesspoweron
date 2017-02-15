@@ -50,6 +50,7 @@ final class Business extends CI_Controller
             redirect($this->agent->referer);
         }
     }
+
     public function detail($id){
         if($this->input->get() && !empty($id)) {
             //Le asignamos las reglas de validacion

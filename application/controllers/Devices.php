@@ -46,6 +46,7 @@ final class Devices extends CI_Controller
             output_error_json(['status'=>0,'No se ha encontrado el dispositivo'],404);
         }
     }
+
     public function index(){
         $user=$this->session->userdata("user");
         if($user->type==ADMIN_USER){
