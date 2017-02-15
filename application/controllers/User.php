@@ -56,10 +56,11 @@ final class User extends CI_Controller
                     if($this->encryption->decrypt($user->password)==$password){
                         $this->session->set_userdata("user",$user);
                         output_json(['status'=>1,'message'=>'Login exitoso','url'=>base_url('main')]);
+                    }else{
+                        output_error_json(['status'=>0,'message'=>'El usuario o la contraseña son incorrectos'],400);
                     }
                 }else{
-
-                    output_error_json(['status'=>0,'message'=>'El usuario o la contraseña son incorrectos']);
+                    output_error_json(['status'=>0,'message'=>'El usuario o la contraseña son incorrectos'],400);
                 }
             }
         }else{

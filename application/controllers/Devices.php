@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-final class Device extends CI_Controller
+final class Devices extends CI_Controller
 {
     const OFF=0;
     const ON=1;
@@ -15,15 +15,32 @@ final class Device extends CI_Controller
 
     }
 
-    public function wakeUp($mac)
+    public function wakeup($mac)
     {
-        if($this->dm->get($mac)->status==self::ON){
+        if($this->dm->get_obj(["mac"=>$mac])->status==self::ON){
+            //die("hola1");
             output_json(['status'=>0,'Este equipo ya esta despierto']);
-        }else if($this->dm->get($mac)->status==self::OFF){
-            $cif=$this->dm->get($mac)->cif;
-            $public_ip=$this->bm->get($cif)->ip;
+        }else if($this->dm->get_obj(["mac"=>$mac])->status==self::OFF){
+            $cif=$this->dm->get_obj(["mac"=>$mac])->cif;
+
+            $public_ip=$this->bm->get_obj(["cif"=>$cif])->ip;
+
             wake_up_device($mac,$public_ip);
-            $this->dm->update(['status'=>self::ON,"last_power_on"=>time()],$mac);
+
+            $this->dm->update(['status'=>self::ON,"last_power_on"=>time()],["mac"=>$mac]);
+
+            output_json(['status'=>1,'Se ha enviado la solicitud']);
+        }else{
+            output_error_json(['status'=>0,'No se ha encontrado el dispositivo'],404);
+        }
+    }
+    public function poweroff($mac)
+    {
+
+        if($this->dm->get_obj(["mac"=>$mac])->status==self::OFF){;
+            output_json(['status'=>0,'Este equipo ya esta apagado']);
+        }else if($this->dm->get_obj(["mac"=>$mac])->status==self::ON){
+            $this->dm->update(['status'=>self::OFF],["mac"=>$mac]);
             output_json(['status'=>1,'Se ha enviado la solicitud']);
         }else{
             output_error_json(['status'=>0,'No se ha encontrado el dispositivo'],404);
@@ -52,8 +69,11 @@ final class Device extends CI_Controller
 
 
     }
-    public function register($cif){
+    public function register(){
         if($this->input->is_ajax_request()){
+            $user=$this->session->userdata("user");
+            $business=$this->bm->get_obj(["user"=>$user->uid]);
+            $cif = $business->cif;
             //Le asignamos las reglas de validacion
             $this->form_validation->set_rules("mac","Direccion Mac","required|min_length[2]|max_length[50]|xss_clean|is_unique[devices.mac]");
             $this->form_validation->set_rules("ip","Direccion IP","required|min_length[7]|max_length[15]|xss_clean|trim");
@@ -67,8 +87,9 @@ final class Device extends CI_Controller
                 output_json(['status'=>0,'message'=>validation_errors()]);
             }else{
                 $post=$this->input->post();
+                $post['cif'] = $cif;
                 if($this->dm->insert($post)){
-                    $this->index($cif);
+                    output_json(['status'=>1,'message'=>'Se ha registrado con exito','url'=>base_url('devices')]);
                 }else{
                     output_error_json(['status'=>0,'message'=>"Error interno al insertar"]);
                 }
@@ -79,6 +100,7 @@ final class Device extends CI_Controller
     }
     public function delete($mac){
         if($this->input->is_ajax_request()){
+
             if($this->dm->delete(["mac"=>$mac])){
                 output_json(['status'=>1,'message'=>"Eliminado con exito"]);
             }else{

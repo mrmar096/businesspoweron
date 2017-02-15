@@ -9,7 +9,7 @@ if(!function_exists('output_json')){
 
     }
     function output_error_json($data,$code=400){
-        http_response_code($code    );
+        http_response_code($code);
         header('Content-Type: application/json');
         echo json_encode($data);
     }

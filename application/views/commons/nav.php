@@ -12,20 +12,24 @@
             <div class="android-header-spacer mdl-layout-spacer"></div>
 
             <!-- Navigation -->
-            <div class="android-navigation-container">
+            <div class="mdl-navigation mdl-layout--large-screen-only">
                 <nav class="mdl-navigation">
 
                     <?php if($this->session->userdata("user")->type == ADMIN_USER) { ?>
                         <a class="mdl-navigation__link" href="">
-                            <div id="admin" class="icon material-icons">child_care</div>
+                            <div id="admin" class="icon material-icons">insert_emoticon</div>
+                            <div class="mdl-tooltip mdl-tooltip--large" for="admin">
+                                ERES ADMIN!
+                            </div>
+                        </a>
+
+                        <a class="mdl-navigation__link" href="">
+                            <div id="user" class="icon material-icons">supervisor_account</div>
+                            <div class="mdl-tooltip mdl-tooltip--large" for="user">
+                                Usuario
+                            </div>
                         </a>
                     <?php }?>
-                    <a class="mdl-navigation__link" href="">
-                        <div id="user" class="icon material-icons">supervisor_account</div>
-                        <div class="mdl-tooltip mdl-tooltip--large" for="user">
-                            Usuario
-                        </div>
-                    </a>
 
 
                     <?php if($this->session->userdata("user")->type == ADMIN_USER) { ?>

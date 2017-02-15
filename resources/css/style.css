@@ -1,11 +1,17 @@
 
 .home-login{
     margin:0 auto;
-    margin-top: 10%;
+    margin-top: 10px;
 }
 
 body{
-    background-color: #f2f2f2;
+    background-color: #f2f2f2!important;
+    overflow:hidden;
+
+}
+
+a{
+    text-decoration: none;
 }
 
 .btn-float{
@@ -18,7 +24,18 @@ body{
     z-index: 900;
 }
 
+.demo-card-wide > .mdl-card__title {
+    color: #fff;
+    height: 176px;
+    width: 600px!important;
+    background: url('../img/it_01.jpg') center / cover;
+}
 
+#error-block{
+    color: red!important;
+    font-size: 9px!important;
+    text-align: center;
+}
 .demo-card-square.mdl-card {
     width: 320px;
     height: 320px;
@@ -29,5 +46,18 @@ body{
     color: #fff;
     background:
             url('../img/flats.png') bottom right 15% no-repeat #f50;
+}
+
+
+.devices-card.mdl-card {
+    width: 320px;
+    height: 320px;
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+.devices-card > .mdl-card__title {
+    color: #fff;
+    background:
+            url('../img/desktop.png') bottom right 15% no-repeat #00bcd4;
 }
 

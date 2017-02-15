@@ -20,7 +20,7 @@ $(function() {
             success:function (response) {
                 console.log(response);
                 if(response.status==1){
-                    window.location.reload();
+                    location.reload();
                 }
                 objHtml.text(objHtmlValue);
             },

@@ -17,6 +17,7 @@
 <script type="text/javascript" src="<?=base_url('resources/js/ajax/delete.js')?>"></script>
 <script type="text/javascript" src="<?=base_url('resources/js/dialogos.js')?>"></script>
 <script type="text/javascript" src="<?=base_url('resources/js/jquery.mask.js')?>"></script>
+<script type="text/javascript" src="<?=base_url('resources/js/wakejs.js')?>"></script>
 <script type="text/javascript">
     $(document).ready(function(){
         $('.ip_address').mask('0ZZ.0ZZ.0ZZ.0ZZ', {
