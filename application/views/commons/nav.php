@@ -27,12 +27,25 @@
                         </div>
                     </a>
 
-                    <a class="mdl-navigation__link" href="<?=base_url('business');?>">
+
+                    <?php if($this->session->userdata("user")->type == ADMIN_USER) { ?>
+                        <a class="mdl-navigation__link" href="<?= base_url('business/all_business');?>">
+                            <div id="em" class="icon material-icons">business</div>
+                            <div class="mdl-tooltip mdl-tooltip--large" for="em">
+                                Empresas
+                            </div>
+                        </a>
+                    <?php } else { ?>
+
+
+                    <a class="mdl-navigation__link" href="<?= base_url('business');?>">
                         <div id="em" class="icon material-icons">business</div>
                         <div class="mdl-tooltip mdl-tooltip--large" for="em">
                             Empresas
                         </div>
                     </a>
+                    <?php } ?>
+
                     <a class="mdl-navigation__link" href="<?=base_url('user/logout');?>">
                         <div id="exit" class="icon material-icons">exit_to_app</div>
                         <div class="mdl-tooltip mdl-tooltip--large" for="exit">

@@ -58,12 +58,12 @@
                 <label class="mdl-textfield__label" for="name">Nombre...</label>
             </div>
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                <input name="cif" class="mdl-textfield__input" type="text" id="cif">
+                <input name="cif" maxlength="9" minlength="9" class="mdl-textfield__input" type="text" id="cif">
                 <label class="mdl-textfield__label" for="cif">Cif...</label>
             </div>
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                <input name="ip" class="mdl-textfield__input" type="text" id="ip">
-                <label class="mdl-textfield__label" for="cif">Ip...</label>
+                <input name="ip" class="mdl-textfield__input ip_address" type="text" id="ip">
+                <label class="mdl-textfield__label" for="ip">Ip...</label>
             </div>
     </div>
     <div class="mdl-card__actions mdl-card--border"></div>

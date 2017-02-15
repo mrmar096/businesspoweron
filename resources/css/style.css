@@ -1,8 +1,12 @@
+
 .home-login{
     margin:0 auto;
     margin-top: 10%;
 }
 
+body{
+    background-color: #f2f2f2;
+}
 
 .btn-float{
     position: fixed!important;
