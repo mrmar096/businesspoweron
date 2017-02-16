@@ -1,2 +1,2 @@
 # businesspoweron
-Scholl Proyect for remote wake up device using Php over Codeigniter
+School Proyect for remote wake up devices using Php over Codeigniter
