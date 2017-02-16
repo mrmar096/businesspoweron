@@ -1,4 +1,3 @@
-
 .home-login{
     margin:0 auto!important;
     margin-top: 10px!important;
@@ -9,7 +8,6 @@ body{
     overflow:hidden;
 
 }
-
 
 .mdl-cell {
     box-sizing: border-box;
@@ -40,7 +38,6 @@ a{
 
 .demo-card-wide > .mdl-card__title {
     color: #fff;
-    height: 176px;
     width: 600px!important;
     background: url('../img/it_01.jpg') center / cover;
 }
