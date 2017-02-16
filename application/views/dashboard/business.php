@@ -1,6 +1,4 @@
-<main>
-
-    <div class="mdl-grid">
+ <div class="mdl-grid">
 
         <?php for ($i = 0; $i < count($data); $i++) { ?>
 

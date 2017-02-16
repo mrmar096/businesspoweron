@@ -1,13 +1,26 @@
 
 .home-login{
-    margin:0 auto;
-    margin-top: 10px;
+    margin:0 auto!important;
+    margin-top: 10px!important;
 }
 
 body{
     background-color: #f2f2f2!important;
     overflow:hidden;
 
+}
+
+
+.mdl-cell {
+    box-sizing: border-box;
+    background-color: #BDBDBD;
+    height: 200px;
+    padding-left: 8px;
+    padding-top: 4px;
+    color: white;
+}
+.mdl-grid:first-of-type .mdl-cell {
+    height: 50px;
 }
 
 

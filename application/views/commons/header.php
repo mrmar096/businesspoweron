@@ -20,3 +20,4 @@
         $this->load->view('commons/nav');
     }
 ?>
+<main class="mdl-layout__content main-body" style="width: 100%">
