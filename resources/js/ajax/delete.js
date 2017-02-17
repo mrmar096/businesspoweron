@@ -2,7 +2,6 @@
  * Created by Mario on 14/02/2017.
  */
 $(function() {
-
     $('a.confirm-delete').on('click', function(e) {
         e.preventDefault();
         console.log("llegado ajax");

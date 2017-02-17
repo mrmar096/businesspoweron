@@ -38,7 +38,7 @@ a{
 
 .demo-card-wide > .mdl-card__title {
     color: #fff;
-    width: 600px!important;
+    min-height: 110px!important;
     background: url('../img/it_01.jpg') center / cover;
 }
 

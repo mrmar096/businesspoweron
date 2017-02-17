@@ -3,8 +3,6 @@
  */
 $(function() {
 	$("#error-block").hide();
-
-
 	$('form').on('submit', function(e) {
 		e.preventDefault();
 		var url=this.action;

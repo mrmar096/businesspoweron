@@ -21,7 +21,7 @@
                         <?php } else { ?>
                             <input type="checkbox" id="<?=$data[$i]->mac?>" class="mdl-switch__input" checked>
                         <?php }?>
-                        <span class="mdl-switch__label">Encendidio</span>
+                        <span id="log" class="mdl-switch__label"></span>
                     </label>
                 </div>
                 <div class="mdl-card__menu">
@@ -31,17 +31,16 @@
 
                     <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
                         for="<?=$i?>">
+                        <?php if($this->session->userdata("user")->type != ADMIN_USER) { ?>
                         <a href="<?= base_url('business/update'); ?>"> <li class="mdl-menu__item">Editar Dispositivo</li></a>
-                        <a href="<?= base_url('devices/delete/'.$data[$i]->mac);?>" class="dialog-del"> <li class="mdl-menu__item">Eliminar Empresa</li></a>
+                        <?php }?>
+                        <a href="<?= base_url('devices/delete/'.$data[$i]->mac);?>" class="dialog-del"> <li class="mdl-menu__item">Eliminar Dispositivo</li></a>
                     </ul>
                 </div>
             </div>
         <?php } ?>
     </div>
 </main>
-
-
-
 
 <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect btn-float dialog-button"><i
         class="material-icons">add</i></button>
@@ -87,3 +86,8 @@
     </div>
 </dialog>
 
+
+    <div id="demo-toast-example" class="mdl-js-snackbar mdl-snackbar">
+        <div class="mdl-snackbar__text"></div>
+        <button class="mdl-snackbar__action" type="button"></button>
+    </div>

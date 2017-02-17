@@ -20,19 +20,20 @@
                     </span>
                 </div>
                 <div class="mdl-card__actions mdl-card--border">
-                    <a href="<?= base_url('devices'); ?>"
-                       class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                    <a href="<?= base_url('devices/index/'.$data[$i]->cif); ?>" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
                         Ver Dispositivos
                     </a>
+
                 </div>
                 <div class="mdl-card__menu">
                     <button id="<?= $i ?>" class="mdl-button mdl-js-button mdl-button--icon">
                         <i class="material-icons">more_vert</i>
                     </button>
 
-                    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
-                        for="<?=$i?>">
-                        <a href="<?= base_url('business/update'); ?>"> <li class="mdl-menu__item">Editar Empresa</li></a>
+                    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="<?=$i?>">
+                        <?php if($this->session->userdata("user")->type != ADMIN_USER) { ?>
+                        <a class="dialog-edit"> <li class="mdl-menu__item">Editar Empresa</li></a>
+                        <?php }?>
                         <a href="<?= base_url('business/delete/'.$data[$i]->cif);?>" class="dialog-del"> <li class="mdl-menu__item">Eliminar Empresa</li></a>
                     </ul>
                 </div>
@@ -88,6 +89,35 @@
     </div>
 </dialog>
 
+
+
+
+ <dialog id="dialog-edit" class="mdl-dialog">
+     <h3>Editar Empresa</h3>
+     <div class="mdl-card__actions mdl-card--border"></div>
+     <div class="mdl-dialog__content">
+         <form id="form" method="post" role="form" action="<?= base_url('business/update'); ?>">
+             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                 <input id="name-edit" name="name" class="mdl-textfield__input" type="name" id="name">
+                 <label class="mdl-textfield__label" for="name">Nombre...</label>
+             </div>
+             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                 <input id="cif-edit" name="cif" maxlength="9" minlength="9" class="mdl-textfield__input" type="text" id="cif">
+                 <label class="mdl-textfield__label" for="cif">Cif...</label>
+             </div>
+             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                 <input id="ip-edit" name="ip" class="mdl-textfield__input ip_address" type="text" id="ip">
+                 <label class="mdl-textfield__label" for="ip">Ip...</label>
+             </div>
+     </div>
+     <div class="mdl-card__actions mdl-card--border"></div>
+
+     <div class="mdl-dialog__actions">
+         <button type="submit" class="mdl-button">Guardar</button>
+         <button type="button" class="mdl-button close">Cerrar</button>
+     </div>
+     </form>
+ </dialog>
 
 
 

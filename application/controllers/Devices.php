@@ -47,10 +47,11 @@ final class Devices extends CI_Controller
         }
     }
 
-    public function index(){
+    public function index($cif = null){
         $user=$this->session->userdata("user");
         if($user->type==ADMIN_USER){
-            $data=$this->dm->get(null);
+            $business=$this->bm->get_obj(["user"=>$user->uid]);
+            $data=$this->dm->get(["cif"=>$cif]);
             $this->dashboard($data);
         }else{
             $business=$this->bm->get_obj(["user"=>$user->uid]);
@@ -66,9 +67,6 @@ final class Devices extends CI_Controller
             }
 
         }
-
-
-
     }
     public function register(){
         if($this->input->is_ajax_request()){
