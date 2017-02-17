@@ -69,7 +69,13 @@ final class User extends CI_Controller
         }
     }
 
-    public function getusers(){
+    public function show_users(){
+        $user=$this->session->userdata("user");
+        if($user->type ==ADMIN_USER ) {
+            $this->load->view("commons/header");
+            $this->load->view('dashboard/users',["data"=>$this->um->get()]);
+            $this->load->view("commons/footer");
+        }
     }
 
     public function register(){

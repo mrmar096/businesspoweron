@@ -13,6 +13,7 @@ final class User_model extends CI_Model
 
     public function get($where=null){
         if(is_null($where)){
+            $this->db->select('name,email,uid,type');
             return $this->db->get(self::TABLE)->result();
         }else{
 

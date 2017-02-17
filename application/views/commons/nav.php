@@ -15,7 +15,7 @@
                         </div>
                     </a>
 
-                    <a class="mdl-navigation__link" href="">
+                    <a class="mdl-navigation__link" href="<?=base_url('user/show_users');?>">
                         <div id="user" class="icon material-icons">supervisor_account</div>
                         <div class="mdl-tooltip mdl-tooltip--large" for="user">
                             Usuario
@@ -55,12 +55,12 @@
         <span class="mdl-layout-title"><?=$this->session->userdata("user")->name;?></span>
         <nav class="mdl-navigation">
             <?php if($this->session->userdata("user")->type == ADMIN_USER) { ?>
-                <a class="mdl-navigation__link" href="">
+                <a class="mdl-navigation__link">
                     <div id="admin" class="icon material-icons">insert_emoticon</div>
                     Modo ADMIN
                 </a>
 
-                <a class="mdl-navigation__link" href="">
+                <a class="mdl-navigation__link" href="<?=base_url('user/show_users');?>">
                     <div id="user" class="icon material-icons">supervisor_account</div>
                     Usuarios
                 </a>

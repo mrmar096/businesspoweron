@@ -34,7 +34,7 @@
                         <?php if($this->session->userdata("user")->type != ADMIN_USER) { ?>
                         <a href="<?= base_url('business/update/'.$data[$i]->cif); ?> "  onclick="return dialogEdit(this.href)"> <li class="mdl-menu__item">Editar Empresa</li></a>
                         <?php }?>
-                        <a href="<?= base_url('business/delete/'.$data[$i]->cif);?>" class="dialog-del"> <li class="mdl-menu__item">Eliminar Empresa</li></a>
+                        <a href="<?= base_url('business/delete/'.$data[$i]->cif);?>"  onclick="return dialogDelete(this.href)"> <li class="mdl-menu__item">Eliminar Empresa</li></a>
                     </ul>
                 </div>
             </div>

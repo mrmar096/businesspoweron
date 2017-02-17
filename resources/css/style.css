@@ -25,7 +25,9 @@ body{
 a{
     text-decoration: none;
 }
-
+table{
+    width: 100%!important;
+}
 .btn-float{
     position: fixed!important;
     display: block;
