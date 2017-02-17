@@ -68,6 +68,10 @@ final class User extends CI_Controller
             redirect(base_url());
         }
     }
+
+    public function getusers(){
+    }
+
     public function register(){
 
         if($this->input->is_ajax_request()){
@@ -124,9 +128,5 @@ final class User extends CI_Controller
     public function all_business(){
         redirect(base_url('business/all_business'));
     }
-
-
-
-
 
 }

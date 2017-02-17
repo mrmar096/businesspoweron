@@ -32,7 +32,7 @@
 
                     <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="<?=$i?>">
                         <?php if($this->session->userdata("user")->type != ADMIN_USER) { ?>
-                        <a class="dialog-edit"> <li class="mdl-menu__item">Editar Empresa</li></a>
+                        <a href="<?= base_url('business/update/'.$data[$i]->cif); ?> "  onclick="return dialogEdit(this.href)"> <li class="mdl-menu__item">Editar Empresa</li></a>
                         <?php }?>
                         <a href="<?= base_url('business/delete/'.$data[$i]->cif);?>" class="dialog-del"> <li class="mdl-menu__item">Eliminar Empresa</li></a>
                     </ul>
@@ -96,14 +96,10 @@
      <h3>Editar Empresa</h3>
      <div class="mdl-card__actions mdl-card--border"></div>
      <div class="mdl-dialog__content">
-         <form id="form" method="post" role="form" action="<?= base_url('business/update'); ?>">
+         <form id="form" method="post" role="form" action="">
              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                  <input id="name-edit" name="name" class="mdl-textfield__input" type="name" id="name">
                  <label class="mdl-textfield__label" for="name">Nombre...</label>
-             </div>
-             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                 <input id="cif-edit" name="cif" maxlength="9" minlength="9" class="mdl-textfield__input" type="text" id="cif">
-                 <label class="mdl-textfield__label" for="cif">Cif...</label>
              </div>
              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                  <input id="ip-edit" name="ip" class="mdl-textfield__input ip_address" type="text" id="ip">

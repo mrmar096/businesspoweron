@@ -29,10 +29,9 @@
                         <i class="material-icons">more_vert</i>
                     </button>
 
-                    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
-                        for="<?=$i?>">
+                    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="<?=$i?>">
                         <?php if($this->session->userdata("user")->type != ADMIN_USER) { ?>
-                        <a href="<?= base_url('devices/update'); ?>" onclick="return dialogEdit()"> <li class="mdl-menu__item">Editar Dispositivo</li></a>
+                        <a href="<?= base_url('devices/update/'.$data[$i]->mac); ?>" onclick="return dialogEdit(this.href)"> <li class="mdl-menu__item">Editar Dispositivo</li></a>
                         <?php }?>
                         <a href="<?= base_url('devices/delete/'.$data[$i]->mac);?>" onclick="return dialogDelete(this.href)"> <li class="mdl-menu__item">Eliminar Dispositivo</li></a>
                     </ul>
@@ -52,11 +51,10 @@
     <div class="mdl-dialog__content">
         <form id="form" method="post" role="form" action="<?= base_url('devices/register'); ?>">
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                <input name="mac" class="mdl-textfield__input mask_address" type="text" id="mac">
                 <label class="mdl-textfield__label" for="mac">Mac...</label>
             </div>
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                <input name="name" class="mdl-textfield__input" type="text" id="name">
+                <input name="name" minlength="6" class="mdl-textfield__input" type="text" id="name">
                 <label class="mdl-textfield__label" for="name">Nombre...</label>
             </div>
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
@@ -91,3 +89,30 @@
         <div class="mdl-snackbar__text"></div>
         <button class="mdl-snackbar__action" type="button"></button>
     </div>
+
+
+
+    <dialog id="dialog-edit" class="mdl-dialog">
+        <h3>Editar Dispositivo</h3>
+        <div class="mdl-card__actions mdl-card--border"></div>
+        <div class="mdl-dialog__content">
+            <form id="form" method="post" role="form" action="">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                </div>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input id="name-edit"  name="name"  minlength="6" class="mdl-textfield__input" type="text">
+                    <label class="mdl-textfield__label" for="cif">Nombre...</label>
+                </div>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input id="ip-edit" name="ip" class="mdl-textfield__input ip_address" type="text">
+                    <label class="mdl-textfield__label" for="ip">Ip...</label>
+                </div>
+        </div>
+        <div class="mdl-card__actions mdl-card--border"></div>
+
+        <div class="mdl-dialog__actions">
+            <button type="submit" class="mdl-button">Guardar</button>
+            <button type="button" class="mdl-button close">Cerrar</button>
+        </div>
+        </form>
+    </dialog>

@@ -40,7 +40,9 @@
             });
         return false;
     }
-    function dialogEdit(){
+    function dialogEdit(url){
+        var form = dialog_edit.querySelector("form");
+        form.action = url;
         dialog_edit.showModal();
         if (!dialog_edit.showModal) {
             dialogPolyfill.registerDialog(dialog);

@@ -69,7 +69,7 @@ final class Business extends CI_Controller
         if($this->input->is_ajax_request()){
             $data=$this->input->post();
             if($this->bm->update($data,["cif"=>$cif])){
-                output_json(['status'=>1,'message'=>"Actualizado con exito"]);
+                output_json(['status'=>1,'message'=>"Actualizado con exito", "url"=>base_url('business')]);
             }else{
                 output_error_json(['status'=>0,'message'=>"No se acualizó ningun elemento"],400);
             }
