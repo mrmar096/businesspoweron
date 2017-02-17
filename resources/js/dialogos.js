@@ -10,6 +10,7 @@
     var dialog_edit = document.querySelector('#dialog-edit');
 
     function dialogRegister(){
+
         dialog.showModal();
 
         if (!dialog.showModal) {

@@ -43,7 +43,7 @@
 </main>
 
 <?php  if((count($data) == 0) && $this->session->userdata("user")-> type != ADMIN_USER){?>
-    <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect btn-float dialog-button"><i
+    <button onclick="return dialogRegister()" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect btn-float dialog-button"><i
             class="material-icons">add</i></button>
 <?php } ?>
 
