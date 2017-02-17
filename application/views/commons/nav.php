@@ -77,7 +77,7 @@
 
                 <a class="mdl-navigation__link" href="<?= base_url('business');?>">
                     <div id="em" class="icon material-icons">business</div>
-                    Emrpresas
+                    Empresas
                 </a>
             <?php } ?>
 
