@@ -32,9 +32,9 @@
                     <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
                         for="<?=$i?>">
                         <?php if($this->session->userdata("user")->type != ADMIN_USER) { ?>
-                        <a href="<?= base_url('business/update'); ?>"> <li class="mdl-menu__item">Editar Dispositivo</li></a>
+                        <a href="<?= base_url('devices/update'); ?>" onclick="return dialogEdit()"> <li class="mdl-menu__item">Editar Dispositivo</li></a>
                         <?php }?>
-                        <a href="<?= base_url('devices/delete/'.$data[$i]->mac);?>" class="dialog-del"> <li class="mdl-menu__item">Eliminar Dispositivo</li></a>
+                        <a href="<?= base_url('devices/delete/'.$data[$i]->mac);?>" onclick="return dialogDelete(this.href)"> <li class="mdl-menu__item">Eliminar Dispositivo</li></a>
                     </ul>
                 </div>
             </div>
@@ -42,7 +42,7 @@
     </div>
 </main>
 
-<button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect btn-float dialog-button"><i
+<button onclick="return dialogRegister()" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect btn-float dialog-button"><i
         class="material-icons">add</i></button>
 
 
