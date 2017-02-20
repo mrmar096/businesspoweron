@@ -47,7 +47,7 @@ final class Devices extends CI_Controller
         }
     }
 
-    public function index($cif = null){
+    public function index(){
         $user=$this->session->userdata("user");
         if($user->type==ADMIN_USER){
             $business=$this->bm->get_obj(["user"=>$user->uid]);
@@ -68,6 +68,15 @@ final class Devices extends CI_Controller
 
         }
     }
+
+    public function admin_index($cif){
+        $user=$this->session->userdata("user");
+        $business=$this->bm->get_obj(["user"=>$user->uid]);
+        $data=$this->dm->get(["cif"=>$cif]);
+        $this->dashboard($data);
+    }
+
+
     public function register(){
         if($this->input->is_ajax_request()){
             $user=$this->session->userdata("user");
@@ -75,7 +84,6 @@ final class Devices extends CI_Controller
             $cif = $business->cif;
             //Le asignamos las reglas de validacion
             $this->form_validation->set_rules("mac","Direccion Mac","required|min_length[2]|max_length[50]|xss_clean|is_unique[devices.mac]");
-            $this->form_validation->set_rules("ip","Direccion IP","required|min_length[7]|max_length[15]|xss_clean|trim");
             $this->form_validation->set_rules("name","Nombre","required|min_length[6]|xss_clean|max_length[25]");
             //Le asignamos los mensajes para las reglas
             $this->form_validation->set_message("required","El campo %s es obligatorio");

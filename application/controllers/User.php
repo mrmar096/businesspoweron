@@ -78,6 +78,7 @@ final class User extends CI_Controller
         }
     }
 
+
     public function register(){
 
         if($this->input->is_ajax_request()){

@@ -20,10 +20,15 @@
                     </span>
                 </div>
                 <div class="mdl-card__actions mdl-card--border">
-                    <a href="<?= base_url('devices/index/'.$data[$i]->cif); ?>" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                    <?php if($this->session->userdata("user")->type != ADMIN_USER) { ?>
+                    <a href="<?= base_url('devices'); ?>" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
                         Ver Dispositivos
                     </a>
-
+                    <?php } else { ?>
+                        <a href="<?= base_url('devices/admin_index/' . $data[$i]->cif); ?>" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                            Ver Dispositivos
+                        </a>
+                    <?php } ?>
                 </div>
                 <div class="mdl-card__menu">
                     <button id="<?= $i ?>" class="mdl-button mdl-js-button mdl-button--icon">

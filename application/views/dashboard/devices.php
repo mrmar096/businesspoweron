@@ -10,9 +10,6 @@
                     <span class="mdl-chip">
                        <span class="mdl-chip__text"><strong>Mac: </strong><?=$data[$i]->mac?></span>
                     </span>
-                    <span class="mdl-chip">
-                       <span class="mdl-chip__text"><strong>IP: </strong><?=$data[$i]->ip?></span>
-                    </span>
                 </div>
                 <div class="mdl-card__actions mdl-card--border">
                     <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="<?=$data[$i]->mac?>">
@@ -58,10 +55,6 @@
                 <input name="name" minlength="6" class="mdl-textfield__input" type="text" id="name">
                 <label class="mdl-textfield__label" for="name">Nombre...</label>
             </div>
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                <input name="ip" class="mdl-textfield__input ip_address" type="text" id="ip">
-                <label class="mdl-textfield__label" for="ip">Ip...</label>
-            </div>
     </div>
     <div class="mdl-card__actions mdl-card--border"></div>
 
@@ -103,10 +96,6 @@
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                     <input id="name-edit"  name="name"  minlength="6" class="mdl-textfield__input" type="text">
                     <label class="mdl-textfield__label" for="cif">Nombre...</label>
-                </div>
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                    <input id="ip-edit" name="ip" class="mdl-textfield__input ip_address" type="text">
-                    <label class="mdl-textfield__label" for="ip">Ip...</label>
                 </div>
         </div>
         <div class="mdl-card__actions mdl-card--border"></div>

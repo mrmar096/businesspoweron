@@ -23,6 +23,7 @@ final class Business extends CI_Controller
         }
     }
 
+
     public function register(){
         if($this->input->is_ajax_request()){
             //Le asignamos las reglas de validacion

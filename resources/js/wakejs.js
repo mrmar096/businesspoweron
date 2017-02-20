@@ -9,14 +9,17 @@ $(function () {
         var snackbarContainer = document.querySelector('#demo-toast-example');
         var url;
         if(status) {
-            url=window.location.href+"/wakeup/"+id;
+
+            url = window.location.href + "/wakeup/"+ id;
+            console.log(url);
             $.post(url, function (data) {
                 console.log(data);
                 var datos = {message: 'Encendiendo Equipo', timeout: 2000};
                 snackbarContainer.MaterialSnackbar.showSnackbar(datos);
             });
         }else{
-            url=window.location.href+"/poweroff/"+id;
+            url=window.location.href + "/poweroff/"+id;
+            console.log(url);
             $.post(url, function (data) {
                 console.log(data);
                 var datos = {message: 'Apagando Equipo', timeout: 2000};
